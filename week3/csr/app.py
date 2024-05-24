@@ -1,53 +1,59 @@
-product_list = ["coke-zero", "corona", "water", "sprite"]
-orders_list = []
+import csv
 
+# LOAD products list from products.txt
 try:
-    with open("week3//data//products.txt", "r") as file:
-        contents = file.read()
-        print(contents)
+    with open("week3//data//products.csv", "r") as file:
+        reader = csv.reader(file)
+        for product_list in reader:
+            print((product_list))
 except Exception as e:
     print(e)
 
+# LOAD couriers list from couriers.txt
 try:
-    with open("week3//data//couriers.txt", "r") as file:
-        contents = file.read().strip("[]").split(",")
-        print(contents)
+    with open("week3//data//couriers.csv", "r") as file:
+        reader = csv.reader(file)
+        for couriers_list in reader:
+            print((couriers_list))
 except Exception as e:
     print(e)
+# product_list = ["coke-zero", "corona", "water", "sprite"]
+# orders_list = []
 
-# orders_list = [
+
+
+orders_list = [
     # Test lists
-    # {
-    #     "name": "Harry Potter",
-    #     "address": "Unit 2, 12 Main Street, London",
-    #     "phone": "07954433211",
-    #     "order_status": "PREPARING",
-    # },
-    # {
-    #     "name": "Hermione Granger",
-    #     "address": "Apartment 4, 7 Baker Street, London",
-    #     "phone": "07891234567",
-    #     "order_status": "PREPARING",
-    # },
-    # {
-    #     "name": "Ron Weasley",
-    #     "address": "Cottage 1, Ottery St Catchpole, Devon",
-    #     "phone": "07781234567",
-    #     "order_status": "PREPARING",
-    # },
-    # {
-    #     "name": "Albus Dumbledore",
-    #     "address": "The Headmaster's Office, Hogwarts School of Witchcraft and Wizardry",
-    #     "phone": "07651234567",
-    #     "order_status": "PREPARING",
-    # },
-    # {
-    #     "name": "Rubeus Hagrid",
-    #     "address": "Hagrid's Hut, Hogwarts School of Witchcraft and Wizardry",
-    #     "phone": "07551234567",
-    #     "order_status": "PREPARING",
-    # },
-# ]
+    {
+        "name": "Harry Potter",
+        "address": "Unit 2, 12 Main Street, London",
+        "phone": "07954433211",
+        "order_status": "PREPARING",
+    },
+    {
+        "name": "Hermione Granger",
+        "address": "Apartment 4, 7 Baker Street, London",
+        "phone": "07891234567",
+        "order_status": "PREPARING",
+    },
+    {
+        "name": "Ron Weasley",
+        "address": "Cottage 1, Ottery St Catchpole, Devon",
+        "phone": "07781234567",
+        "order_status": "PREPARING",
+    },
+    {
+        "name": "Albus Dumbledore",
+        "address": "The Headmaster's Office, Hogwarts School of Witchcraft and Wizardry",
+        "phone": "07651234567",
+        "order_status": "PREPARING",
+    },
+    {
+        "name": "Rubeus Hagrid",
+        "address": "Hagrid's Hut, Hogwarts School of Witchcraft and Wizardry",
+        "phone": "07551234567",
+        "order_status": "PREPARING",
+    }]
 
 main_menu_options = ["0-Exit App", "1-Product Menu", "2-Orders Menu"]
 
