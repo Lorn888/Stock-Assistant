@@ -18,8 +18,8 @@ try:
 except Exception as e:
     print(e)
 
-# CREATE couriers list of dictionaries
-couriers_list = [
+# CREATE orders list of dictionaries
+orders_list = [
     {
         "name": "Harry Potter",
         "address": "Unit 2, 12 Main Street, London",
@@ -50,7 +50,10 @@ couriers_list = [
 # CREATE order status list
 order_status = ["PREPARING","READY","SHIPPED"] 
 
-main_menu_options = ["0-Exit App", "1-Product Menu", "2-couriers Menu"]
+main_menu_options = ["0-Exit App", 
+    "1-Product Menu",
+    "2-Couriers Menu", 
+    "3-Orders Menu"]
 
 product_menu_options = [
     "0-Return to the Main Menu",
@@ -60,9 +63,17 @@ product_menu_options = [
     "4-Delete Product",
 ]
 
-couriers_menu_options = [
+courier_menu_options = [
     "0-Return to the Main Menu",
-    "1-Print couriers dictionary",
+    "1-Print courier list",
+    "2-Create a new Courier",
+    "3-Update Existing Courier",
+    "4-Delete Order",
+]
+
+order_menu_options = [
+    "0-Return to the Main Menu",
+    "1-Print orders dictionary",
     "2-Create a new order",
     "3-Update Existing Order Status",
     "4-Update Existing Order",
@@ -74,7 +85,7 @@ while True:
 # PRINT main menu options
     print(main_menu_options)
 # GET user input for main menu option
-    main_menu_input = int(input("Chose from the above 3 options '0-2'"))
+    main_menu_input = int(input("Chose from the above 3 options '0-3'"))
 
     if main_menu_input == 0:
 # SAVE products list to products.txt
@@ -137,21 +148,23 @@ while True:
 # DELETE product at index in products list 
                 products_list.remove(products_list[product_to_delete])
                 print(products_list)
-
     elif main_menu_input == 2:
+        print(courier_menu_options)
+    
+    elif main_menu_input == 3:
         
         while True:
 
-            print(couriers_menu_options)
-            couriers_menu_input = int(input("Chose from above couriers Menu"))
+            print(orders_menu_options)
+            orders_menu_input = int(input("Chose from above Orders Menu"))
 
-            if couriers_menu_input == 0:
+            if orders_menu_input == 0:
                 break
 
-            elif couriers_menu_input == 1:
-                print(couriers_list)
+            elif orders_menu_input == 1:
+                print(orders_list)
 
-            elif couriers_menu_input == 2:
+            elif orders_menu_input == 2:
                 customer_name_input = input("Insert Customer name eg.'Harry Potter'")
                 # name_list = customer_name_input.split(" ")
                 # print(name_list)
@@ -165,7 +178,7 @@ while True:
                 # print([last_dig])
                 order_status = "PREPARING"
                 # customer_order_id = f"{name_list[0]}-{name_list[1]}-{last_dig}"
-                # couriers_list.append
+                # orders_list.append
 
                 customer_order = {
                     "name": customer_name_input,
@@ -173,43 +186,43 @@ while True:
                     "phone": customer_phone_input,
                     "order_status": order_status,
                 }
-                couriers_list.append(customer_order)
+                orders_list.append(customer_order)
                 
 
 
-            elif couriers_menu_input == 3:
-                for order in couriers_list:
-                    print(f"{couriers_list.index(order)}-{order}")
+            elif orders_menu_input == 3:
+                for order in orders_list:
+                    print(f"{orders_list.index(order)}-{order}")
                 order_status_to_update_input = int(
                     input("Chose the order to update the status")
                 )
                 print(
-                    f"{order_status_to_update_input}-{couriers_list[order_status_to_update_input]['order_status']}"
+                    f"{order_status_to_update_input}-{orders_list[order_status_to_update_input]['order_status']}"
                 )
                 updated_status_input = input("What would you like to update it to?")
-                couriers_list[order_status_to_update_input][
+                orders_list[order_status_to_update_input][
                     "order_status"
                 ] = updated_status_input
 
-            elif couriers_menu_input == 4:
-                for order in couriers_list:
-                    print(f"{couriers_list.index(order)}-{order}")
+            elif orders_menu_input == 4:
+                for order in orders_list:
+                    print(f"{orders_list.index(order)}-{order}")
                 order_to_update = int(input("Chose order to update"))
 
                 name_update_input = input("name:")
                 if len(name_update_input) > 0:
-                    couriers_list[order_to_update]["name"] = name_update_input
+                    orders_list[order_to_update]["name"] = name_update_input
 
                 adress_update_input = input("address:")
                 if len(adress_update_input) > 0:
-                    couriers_list[order_to_update]["address"] = adress_update_input
+                    orders_list[order_to_update]["address"] = adress_update_input
 
                 phone_update_input = input("phone:")
                 if len(phone_update_input) > 0:
-                    couriers_list[order_to_update]["phone"] = phone_update_input
+                    orders_list[order_to_update]["phone"] = phone_update_input
 
-            elif couriers_menu_input == 5:
-                for order in couriers_list:
-                    print(f"{couriers_list.index(order)}-{order}")
+            elif orders_menu_input == 5:
+                for order in orders_list:
+                    print(f"{orders_list.index(order)}-{order}")
                 order_to_delete = int(input("Chose order to delete"))
-                del couriers_list[order_to_delete]
+                del orders_list[order_to_delete]
