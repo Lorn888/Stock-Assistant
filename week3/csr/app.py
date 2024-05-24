@@ -17,13 +17,9 @@ try:
             print((couriers_list))
 except Exception as e:
     print(e)
-# product_list = ["coke-zero", "corona", "water", "sprite"]
-# orders_list = []
 
-
-
+# CREATE orders list of dictionaries
 orders_list = [
-    # Test lists
     {
         "name": "Harry Potter",
         "address": "Unit 2, 12 Main Street, London",
