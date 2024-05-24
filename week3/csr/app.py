@@ -4,8 +4,8 @@ import csv
 try:
     with open("week3//data//products.csv", "r") as file:
         reader = csv.reader(file)
-        for product_list in reader:
-            print((product_list))
+        for products_list in reader:
+            print(products_list)
 except Exception as e:
     print(e)
 
@@ -14,7 +14,7 @@ try:
     with open("week3//data//couriers.csv", "r") as file:
         reader = csv.reader(file)
         for couriers_list in reader:
-            print((couriers_list))
+            print(couriers_list)
 except Exception as e:
     print(e)
 
@@ -69,29 +69,47 @@ orders_menu_options = [
     "5-Delete Order",
 ]
 
-print(main_menu_options)
-
 
 while True:
+# PRINT main menu options
+    print(main_menu_options)
+# GET user input for main menu option
     main_menu_input = int(input("Chose from the above 3 options '0-2'"))
 
     if main_menu_input == 0:
-        break
+# SAVE products list to products.txt
+        try:
+            with open("week3/data/products.csv", "w") as file:
+                writer = csv.writer(file)
+                writer.writerow(products_list)
+        except Exception as e:
+            print(e)
+# SAVE couriers list to couriers.txt 
+        try:
+            with open("week3/data/couriers.csv", "w") as file:
+                writer = csv.writer(file)
+                writer.writerow(couriers_list)
+        except Exception as e:
+            print(e)
 
+        break
+                
     elif main_menu_input == 1:
         while True:
+# PRINT product menu options
             print(product_menu_options)
+# GET user input for product menu option 
             product_menu_input = int(input("Chose from above product menu"))
 
             if product_menu_input == 0:
                 break
 
             elif product_menu_input == 1:
-                print(product_list)
+                print(products_list)
 
             elif product_menu_input == 2:
                 new_product_input = input("type the name of the new product")
-                product_list.append(new_product_input)
+                products_list.append(new_product_input)
 
             elif product_menu_input == 3:
 
