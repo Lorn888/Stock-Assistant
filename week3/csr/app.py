@@ -165,7 +165,16 @@ while True:
                 new_courier_input = input("Type new couriers nema:")
 # APPEND courier name to couriers list
                 couriers_list.append(new_courier_input)
-
+            elif courier_menu_input == 3:
+                for courier in couriers_list:
+# PRINT courier names with its index value
+                    print(f"{couriers_list.index(courier)}-{courier}")
+# GET user input for courier index value
+                update_courier_input = int(input("Chose courier to update"))
+# GET user input for new courier name 
+                new_courier_input = input("Type new couriers name") 
+# UPDATE courier name at index in couriers list
+                couriers_list[update_courier_input] = new_courier_input
 
 
 
