@@ -48,12 +48,12 @@ orders_list = [
 ]
 
 # CREATE order status list
-order_status = ["PREPARING","READY","SHIPPED"] 
+order_status = ["PREPARING", "READY", "SHIPPED"]
 
-main_menu_options = ["0-Exit App", 
-    "1-Product Menu",
-    "2-Couriers Menu", 
-    "3-Orders Menu"]
+main_menu_options = ["0-Exit App",
+                     "1-Product Menu",
+                     "2-Couriers Menu",
+                     "3-Orders Menu"]
 
 product_menu_options = [
     "0-Return to the Main Menu",
@@ -82,20 +82,20 @@ order_menu_options = [
 
 
 while True:
-# PRINT main menu options
+    # PRINT main menu options
     print(main_menu_options)
 # GET user input for main menu option
     main_menu_input = int(input("Chose from the above 3 options '0-3'"))
 
     if main_menu_input == 0:
-# SAVE products list to products.txt
+        # SAVE products list to products.txt
         try:
             with open("week3/data/products.csv", "w") as file:
                 writer = csv.writer(file)
                 writer.writerow(products_list)
         except Exception as e:
             print(e)
-# SAVE couriers list to couriers.txt 
+# SAVE couriers list to couriers.txt
         try:
             with open("week3/data/couriers.csv", "w") as file:
                 writer = csv.writer(file)
@@ -104,89 +104,89 @@ while True:
             print(e)
 
         break
-                
+
     elif main_menu_input == 1:
         while True:
-# PRINT product menu options
+            # PRINT product menu options
             print(product_menu_options)
-# GET user input for product menu option 
+# GET user input for product menu option
             product_menu_input = int(input("Chose from above product menu"))
 
             if product_menu_input == 0:
-# RETURN to main menu
+                # RETURN to main menu
                 break
 
             elif product_menu_input == 1:
-# PRINT products list
+                # PRINT products list
                 print(products_list)
 
             elif product_menu_input == 2:
-# GET user input for product name
+                # GET user input for product name
                 new_product_input = input("type the name of the new product")
-# APPEND product name to products list 
+# APPEND product name to products list
                 products_list.append(new_product_input)
 
             elif product_menu_input == 3:
 
                 for product in products_list:
-# PRINT product names with its index value
+                    # PRINT product names with its index value
                     print(f"{products_list.index(product)}-{product}")
 # GET user input for product index value
-                product_to_update_input = int(input("Chose the product to update"))
-# GET user input for new product name 
+                product_to_update_input = int(
+                    input("Chose the product to update"))
+# GET user input for new product name
                 new_product_name = input("Type the name of the new product")
 # UPDATE product name at index in products list
                 products_list[product_to_update_input] = new_product_name
                 print(products_list)
 
             elif product_menu_input == 4:
-# PRINT products list
+                # PRINT products list
                 for product in products_list:
                     print(f"{products_list.index(product)}-{product}")
-# GET user input for product index value 
+# GET user input for product index value
                 product_to_delete = int(input("Chose the product to delete"))
-# DELETE product at index in products list 
+# DELETE product at index in products list
                 products_list.remove(products_list[product_to_delete])
                 print(products_list)
     elif main_menu_input == 2:
         while True:
-# PRINT courier menu options
+            # PRINT courier menu options
             print(courier_menu_options)
 # GET user input for courier menu option
             courier_menu_input = int(input("Chose from above courier menu"))
             if courier_menu_input == 0:
-# RETURN to main menu
+                # RETURN to main menu
                 break
             elif courier_menu_input == 1:
-# PRINT couriers list 
+                # PRINT couriers list
                 print(couriers_list)
             elif courier_menu_input == 2:
-# GET user input for courier name 
+                # GET user input for courier name
                 new_courier_input = input("Type new couriers nema:")
 # APPEND courier name to couriers list
                 couriers_list.append(new_courier_input)
             elif courier_menu_input == 3:
                 for courier in couriers_list:
-# PRINT courier names with its index value
+                    # PRINT courier names with its index value
                     print(f"{couriers_list.index(courier)}-{courier}")
 # GET user input for courier index value
                 update_courier_input = int(input("Chose courier to update"))
-# GET user input for new courier name 
-                new_courier_input = input("Type new couriers name") 
+# GET user input for new courier name
+                new_courier_input = input("Type new couriers name")
 # UPDATE courier name at index in couriers list
                 couriers_list[update_courier_input] = new_courier_input
             elif courier_menu_input == 4:
-# PRINT courier list 
+                # PRINT courier list
                 for courier in couriers_list:
                     print(f"{couriers_list.index(courier)}-{courier}")
-# GET user input for courier index value 
+# GET user input for courier index value
                 delete_courier_input = int(input("Chose courier to delete"))
-# DELETE courier at index in courier list 
+# DELETE courier at index in courier list
                 couriers_list.remove(couriers_list[delete_courier_input])
 
-
     elif main_menu_input == 3:
-        
+
         while True:
 
             print(orders_menu_options)
@@ -199,7 +199,8 @@ while True:
                 print(orders_list)
 
             elif orders_menu_input == 2:
-                customer_name_input = input("Insert Customer name eg.'Harry Potter'")
+                customer_name_input = input(
+                    "Insert Customer name eg.'Harry Potter'")
                 # name_list = customer_name_input.split(" ")
                 # print(name_list)
                 customer_adress_input = input(
@@ -221,8 +222,6 @@ while True:
                     "order_status": order_status,
                 }
                 orders_list.append(customer_order)
-                
-
 
             elif orders_menu_input == 3:
                 for order in orders_list:
@@ -233,7 +232,8 @@ while True:
                 print(
                     f"{order_status_to_update_input}-{orders_list[order_status_to_update_input]['order_status']}"
                 )
-                updated_status_input = input("What would you like to update it to?")
+                updated_status_input = input(
+                    "What would you like to update it to?")
                 orders_list[order_status_to_update_input][
                     "order_status"
                 ] = updated_status_input
