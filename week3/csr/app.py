@@ -23,33 +23,32 @@ orders_list = [
     {
         "name": "Harry Potter",
         "address": "Unit 2, 12 Main Street, London",
-        "phone": "07954433211",
-        "order_status": "PREPARING",
+        "phone": "07954433211"
     },
     {
         "name": "Hermione Granger",
         "address": "Apartment 4, 7 Baker Street, London",
-        "phone": "07891234567",
-        "order_status": "PREPARING",
+        "phone": "07891234567"
     },
     {
         "name": "Ron Weasley",
         "address": "Cottage 1, Ottery St Catchpole, Devon",
-        "phone": "07781234567",
-        "order_status": "PREPARING",
+        "phone": "07781234567"
     },
     {
         "name": "Albus Dumbledore",
         "address": "The Headmaster's Office, Hogwarts School of Witchcraft and Wizardry",
-        "phone": "07651234567",
-        "order_status": "PREPARING",
+        "phone": "07651234567"
     },
     {
         "name": "Rubeus Hagrid",
         "address": "Hagrid's Hut, Hogwarts School of Witchcraft and Wizardry",
-        "phone": "07551234567",
-        "order_status": "PREPARING",
-    }]
+        "phone": "07551234567"
+    }
+]
+
+# CREATE order status list
+order_status = ["PREPARING","READY","SHIPPED"] 
 
 main_menu_options = ["0-Exit App", "1-Product Menu", "2-Orders Menu"]
 
