@@ -149,8 +149,26 @@ while True:
                 products_list.remove(products_list[product_to_delete])
                 print(products_list)
     elif main_menu_input == 2:
-        print(courier_menu_options)
-    
+        while True:
+# PRINT courier menu options
+            print(courier_menu_options)
+# GET user input for courier menu option
+            courier_menu_input = int(input("Chose from above courier menu"))
+            if courier_menu_input == 0:
+# RETURN to main menu
+                break
+            elif courier_menu_input == 1:
+# PRINT couriers list 
+                print(couriers_list)
+            elif courier_menu_input == 2:
+# GET user input for courier name 
+                new_courier_input = input("Type new couriers nema:")
+# APPEND courier name to couriers list
+                couriers_list.append(new_courier_input)
+
+
+
+
     elif main_menu_input == 3:
         
         while True:
