@@ -175,7 +175,14 @@ while True:
                 new_courier_input = input("Type new couriers name") 
 # UPDATE courier name at index in couriers list
                 couriers_list[update_courier_input] = new_courier_input
-
+            elif courier_menu_input == 4:
+# PRINT courier list 
+                for courier in couriers_list:
+                    print(f"{couriers_list.index(courier)}-{courier}")
+# GET user input for courier index value 
+                delete_courier_input = int(input("Chose courier to delete"))
+# DELETE courier at index in courier list 
+                couriers_list.remove(couriers_list[delete_courier_input])
 
 
     elif main_menu_input == 3:
