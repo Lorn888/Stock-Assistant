@@ -23,37 +23,45 @@ orders_list = [
     {
         "name": "Harry Potter",
         "address": "Unit 2, 12 Main Street, London",
-        "phone": "07954433211"
+        "phone": "07954433211",
+        "order_status": "SHIPPED"
     },
     {
         "name": "Hermione Granger",
         "address": "Apartment 4, 7 Baker Street, London",
-        "phone": "07891234567"
+        "phone": "07891234567",
+        "order_status": "READY"
     },
     {
         "name": "Ron Weasley",
         "address": "Cottage 1, Ottery St Catchpole, Devon",
-        "phone": "07781234567"
+        "phone": "07781234567",
+        "order_status": "PREPARING"
     },
     {
         "name": "Albus Dumbledore",
         "address": "The Headmaster's Office, Hogwarts School of Witchcraft and Wizardry",
-        "phone": "07651234567"
+        "phone": "07651234567",
+        "order_status": "PREPARING"
     },
     {
         "name": "Rubeus Hagrid",
         "address": "Hagrid's Hut, Hogwarts School of Witchcraft and Wizardry",
-        "phone": "07551234567"
+        "phone": "07551234567",
+        "order_status": "READY"
     }
 ]
+
 
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
-main_menu_options = ["0-Exit App",
-                     "1-Product Menu",
-                     "2-Couriers Menu",
-                     "3-Orders Menu"]
+main_menu_options = [
+    "0-Exit App",
+    "1-Product Menu",
+    "2-Couriers Menu",
+    "3-Orders Menu"
+]
 
 product_menu_options = [
     "0-Return to the Main Menu",
@@ -71,7 +79,7 @@ courier_menu_options = [
     "4-Delete Order",
 ]
 
-order_menu_options = [
+orders_menu_options = [
     "0-Return to the Main Menu",
     "1-Print orders dictionary",
     "2-Create a new order",
@@ -225,18 +233,19 @@ while True:
 
             elif orders_menu_input == 3:
                 for order in orders_list:
+# PRINT orders list with its index values
                     print(f"{orders_list.index(order)}-{order}")
+# GET user input for order index value 
                 order_status_to_update_input = int(
-                    input("Chose the order to update the status")
+                    input("Chose the order to update the status of")
                 )
-                print(
-                    f"{order_status_to_update_input}-{orders_list[order_status_to_update_input]['order_status']}"
-                )
-                updated_status_input = input(
-                    "What would you like to update it to?")
-                orders_list[order_status_to_update_input][
-                    "order_status"
-                ] = updated_status_input
+# PRINT order status list with index values
+                for status in order_status:
+                    print(f"{order_status.index(status)}-{status}")
+
+                updated_status_input = int(input(
+                    "What would you like to update it to?"))
+                orders_list[order_status_to_update_input]["order_status"] = order_status[updated_status_input]
 
             elif orders_menu_input == 4:
                 for order in orders_list:
