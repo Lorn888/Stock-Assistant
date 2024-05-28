@@ -74,42 +74,42 @@ IF user input is 0:
 ✔    SAVE products list to products.csv
 ✔    SAVE couriers list to couriers.csv
 ✔    SAVE orders list to order.csv
-    EXIT app
+✔    EXIT app
 
 # products menu
 ELSE IF user input is 1:
-    PRINT product menu options
-    GET user input for product menu option
+✔    PRINT product menu options
+✔    GET user input for product menu option
 
     IF user inputs 0:
-        RETURN to main menu
+✔        RETURN to main menu
 
     ELSE IF user input is 1:
-        PRINT products list
+✔        PRINT products list
 
     # WEEK 4 UPDATE
     ELSE IF user input is 2:
         # CREATE new product
 
-        GET user input for product name
-        GET user input for product price
-        CREATE new product dictionary with above properties
-        APPEND product dictionary to products list
+✔        GET user input for product name
+✔        GET user input for product price
+✔        CREATE new product dictionary with above properties
+✔        APPEND product dictionary to products list
 
     # WEEK 4 UPDATE
     ELSE IF user input is 3: 
         # STRETCH GOAL - UPDATE existing product
 
-        PRINT products with their index values
-        GET user input for product index value
+✔        PRINT products with their index values
+✔        GET user input for product index value
 
         # iterate over the (key: value) pairs in the selected dictionary
         FOR EACH key-value pair in selected product dictionary:
-            GET user input for updated property
+✔            GET user input for updated property
             IF user input is blank:
-                do not update this property and skip
+✔                do not update this property and   skip
             ELSE:
-                update the property value with user input
+✔                update the property value with user input
 
     ELSE IF user input is 4:
         # STRETCH GOAL - DELETE product

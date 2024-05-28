@@ -1,1 +1,5 @@
-"{'name': 'Tomek', 'phone': '0789887889'}","{'name': 'Mike', 'phone': '0789887889'}","{'name': 'Sudesh', 'phone': '0789887889'}","{'name': 'Hammed', 'phone': '0789887889'}"
+name,phone
+Tomek,0789887889
+Mike,0789887889
+Sudesh,0789887889
+Hammed,0789887889

@@ -10,7 +10,7 @@ except Exception as e:
 
 
 # LOAD couriers list from couriers.csv
-couriers_list =[]
+couriers_list = []
 try:
     with open("week4//data//couriers.csv", "r", newline="") as file:
         reader = csv.DictReader(file)
@@ -19,7 +19,7 @@ except Exception as e:
     print(e)
 
 # LOAD orders from orders.csv
-orders_list =[]
+orders_list = []
 try:
     with open("week4//data//orders.csv", "r", newline="") as file:
         reader = csv.DictReader(file)
@@ -35,12 +35,7 @@ print(products_list)
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
-main_menu_options = [
-    "0-Exit App",
-    "1-Product Menu", 
-    "2-Couriers Menu", 
-    "3-Orders Menu"
-]
+main_menu_options = ["0-Exit App", "1-Product Menu", "2-Couriers Menu", "3-Orders Menu"]
 
 product_menu_options = [
     "0-Return to the Main Menu",
@@ -75,9 +70,9 @@ while True:
     main_menu_input = int(input("Chose from the above 3 options '0-3'"))
 
     if main_menu_input == 0:
-# SAVE products list to products.csv
+        # SAVE products list to products.csv
         try:
-            header = ["name","price"] 
+            header = ["name", "price"]
             with open("week3/data/products.csv", "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=header)
                 writer.writeheader()
@@ -87,7 +82,7 @@ while True:
             print(e)
         # SAVE couriers list to couriers.txt
         try:
-            header = ["name","phone"] 
+            header = ["name", "phone"]
             with open("week3/data/couriers.csv", "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=header)
                 writer.writeheader()
@@ -97,7 +92,14 @@ while True:
             print(e)
         # SAVE orders list to order.csv
         try:
-            header = ["customer_name","customer_address","customer_phone","courier","status","items"] 
+            header = [
+                "customer_name",
+                "customer_address",
+                "customer_phone",
+                "courier",
+                "status",
+                "items",
+            ]
             with open("week3/data/orders.csv", "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=header)
                 writer.writeheader()
@@ -105,8 +107,7 @@ while True:
                     writer.writerow(row)
         except Exception as e:
             print(e)
-        
-
+        # EXIT app
         break
 
     elif main_menu_input == 1:
@@ -127,21 +128,36 @@ while True:
             elif product_menu_input == 2:
                 # GET user input for product name
                 new_product_input = input("type the name of the new product")
-                # APPEND product name to products list
-                products_list.append(new_product_input)
+                # GET user input for product price
+                new_product_price_input = float(
+                    input("type the price of the new product")
+                )
+                # CREATE new product dictionary with above properties
+                new_product = {
+                    "name": new_product_input,
+                    "price": new_product_price_input
+                }
+            # APPEND product dictionary to products list
+                products_list.append(new_product)
 
             elif product_menu_input == 3:
 
-                for product in products_list:
                     # PRINT product names with its index value
+                for product in products_list:
                     print(f"{products_list.index(product)}-{product}")
                 # GET user input for product index value
                 product_to_update_input = int(input("Chose the product to update"))
-                # GET user input for new product name
-                new_product_name = input("Type the name of the new product")
-                # UPDATE product name at index in products list
-                products_list[product_to_update_input] = new_product_name
-                print(products_list)
+
+                for i in products_list[product_to_update_input]:
+                    # GET user input for updated property
+                    user_input = input(i)
+                    if len(user_input) <= 0:
+                        # do not update this property and skip
+                        products_list[product_to_update_input][i] = i
+                    else:
+                        # update the property value with user input
+                        products_list[product_to_update_input][i] = user_input
+                    
 
             elif product_menu_input == 4:
                 # PRINT products list
