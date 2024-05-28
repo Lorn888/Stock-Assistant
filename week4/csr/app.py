@@ -1,56 +1,36 @@
 import csv
 
-# LOAD products list from products.txt
+# LOAD products list from products.csv
+products_list =[]
 try:
-    with open("week3//data//products.csv", "r") as file:
-        reader = csv.reader(file)
-        for products_list in reader:
-            print(products_list)
+    with open("week4//data//products.csv", "r", newline="") as file:
+        reader = csv.DictReader(file)
+        products_list = [row for row in reader]
 except Exception as e:
     print(e)
 
-# LOAD couriers list from couriers.txt
+
+# LOAD couriers list from couriers.csv
+couriers_list =[]
 try:
-    with open("week3//data//couriers.csv", "r") as file:
-        reader = csv.reader(file)
-        for couriers_list in reader:
-            print(couriers_list)
+    with open("week4//data//couriers.csv", "r", newline="") as file:
+        reader = csv.DictReader(file)
+        couriers_list = [row for row in reader]
 except Exception as e:
     print(e)
 
-# CREATE orders list of dictionaries
-orders_list = [
-    {
-        "name": "Harry Potter",
-        "address": "Unit 2, 12 Main Street, London",
-        "phone": "07954433211",
-        "order_status": "SHIPPED",
-    },
-    {
-        "name": "Hermione Granger",
-        "address": "Apartment 4, 7 Baker Street, London",
-        "phone": "07891234567",
-        "order_status": "READY",
-    },
-    {
-        "name": "Ron Weasley",
-        "address": "Cottage 1, Ottery St Catchpole, Devon",
-        "phone": "07781234567",
-        "order_status": "PREPARING",
-    },
-    {
-        "name": "Albus Dumbledore",
-        "address": "The Headmaster's Office, Hogwarts School of Witchcraft and Wizardry",
-        "phone": "07651234567",
-        "order_status": "PREPARING",
-    },
-    {
-        "name": "Rubeus Hagrid",
-        "address": "Hagrid's Hut, Hogwarts School of Witchcraft and Wizardry",
-        "phone": "07551234567",
-        "order_status": "READY",
-    },
-]
+# LOAD orders from orders.csv
+orders_list =[]
+try:
+    with open("week4//data//orders.csv", "r", newline="") as file:
+        reader = csv.DictReader(file)
+        orders_list = [row for row in reader]
+except Exception as e:
+    print(e)
+
+print(orders_list)
+print(couriers_list)
+print(products_list)
 
 
 # CREATE order status list
