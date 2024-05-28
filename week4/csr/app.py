@@ -280,7 +280,7 @@ while True:
                     input("What would you like to update it to?")
                 )
                 # UPDATE status for order
-                orders_list[order_status_to_update_input]["order_status"] = (
+                orders_list[order_status_to_update_input]["status"] = (
                     order_status[updated_status_input]
                 )
 

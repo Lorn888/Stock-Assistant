@@ -188,31 +188,31 @@ ELSE IF user input is 3:
     ELSE IF user input is 3:
         # UPDATE existing order status
 
-        PRINT orders list with its index values
-        GET user input for order index value
+✔        PRINT orders list with its index values
+✔        GET user input for order index value
 
-        PRINT order status list with index values
-        GET user input for order status index value
-        UPDATE status for order
+✔        PRINT order status list with index values
+✔        GET user input for order status index value
+✔        UPDATE status for order
 
     ELSE IF user input is 4:
         # STRETCH - UPDATE existing order
 
-        PRINT orders list with its index values
-        GET user input for order index value
+✔        PRINT orders list with its index values
+✔        GET user input for order index value
 
         # iterate over the (key: value) pairs in the selected dictionary
         FOR EACH key-value pair in selected order dictionary:
-            GET user input for updated property
+✔            GET user input for updated property
             IF user input is blank:
-                do not update this property
+✔                do not update this property
             ELSE:
-                update the property value with user input
+✔               update the property value with user input
 
     ELSE IF user input is 5:
         # STRETCH GOAL - DELETE order
                     
-        PRINT orders list
-        GET user input for order index value
-        DELETE order at index in order list
+✔        PRINT orders list
+✔        GET user input for order index value
+✔        DELETE order at index in order list
 ```
