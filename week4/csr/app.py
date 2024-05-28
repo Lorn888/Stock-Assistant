@@ -1,7 +1,6 @@
 import csv
 
 # LOAD products list from products.csv
-products_list =[]
 try:
     with open("week4//data//products.csv", "r", newline="") as file:
         reader = csv.DictReader(file)
@@ -36,7 +35,12 @@ print(products_list)
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
-main_menu_options = ["0-Exit App", "1-Product Menu", "2-Couriers Menu", "3-Orders Menu"]
+main_menu_options = [
+    "0-Exit App",
+    "1-Product Menu", 
+    "2-Couriers Menu", 
+    "3-Orders Menu"
+]
 
 product_menu_options = [
     "0-Return to the Main Menu",
@@ -71,20 +75,27 @@ while True:
     main_menu_input = int(input("Chose from the above 3 options '0-3'"))
 
     if main_menu_input == 0:
-        # SAVE products list to products.txt
+# SAVE products list to products.csv
         try:
-            with open("week3/data/products.csv", "w") as file:
-                writer = csv.writer(file)
-                writer.writerow(products_list)
+            header = ["name","price"] 
+            with open("week3/data/products.csv", "w", newline="") as file:
+                writer = csv.DictWriter(file, fieldnames=header)
+                writer.writeheader()
+                for row in products_list:
+                    writer.writerow(row)
         except Exception as e:
             print(e)
         # SAVE couriers list to couriers.txt
         try:
-            with open("week3/data/couriers.csv", "w") as file:
-                writer = csv.writer(file)
-                writer.writerow(couriers_list)
+            header = ["name","phone"] 
+            with open("week3/data/couriers.csv", "w", newline="") as file:
+                writer = csv.DictWriter(file, fieldnames=header)
+                writer.writeheader()
+                for row in couriers_list:
+                    writer.writerow(row)
         except Exception as e:
             print(e)
+        
 
         break
 
