@@ -95,6 +95,16 @@ while True:
                     writer.writerow(row)
         except Exception as e:
             print(e)
+        # SAVE orders list to order.csv
+        try:
+            header = ["customer_name","customer_address","customer_phone","courier","status","items"] 
+            with open("week3/data/orders.csv", "w", newline="") as file:
+                writer = csv.DictWriter(file, fieldnames=header)
+                writer.writeheader()
+                for row in orders_list:
+                    writer.writerow(row)
+        except Exception as e:
+            print(e)
         
 
         break

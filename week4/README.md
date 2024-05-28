@@ -72,8 +72,8 @@ John,"Unit 2, 12 Main Street, LONDON, WH1 2ER",2,preparing,"1,3,4"
 
 IF user input is 0:
 ✔    SAVE products list to products.csv
-    SAVE couriers list to couriers.csv
-    SAVE orders list to order.csv
+✔    SAVE couriers list to couriers.csv
+✔    SAVE orders list to order.csv
     EXIT app
 
 # products menu
