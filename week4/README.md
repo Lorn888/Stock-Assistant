@@ -114,76 +114,76 @@ ELSE IF user input is 1:
     ELSE IF user input is 4:
         # STRETCH GOAL - DELETE product
         
-        PRINT products list
-        GET user input for product index value
-        DELETE product dictionary at index in products list
+✔        PRINT products list
+✔        GET user input for product index value
+✔        DELETE product dictionary at index in products list
 
 # couriers menu
 ELSE IF user input is 2:
-    PRINT courier menu options
-    GET user input for courier menu option
+✔    PRINT courier menu options
+✔    GET user input for courier menu option
 
     IF user inputs 0:
-        RETURN to main menu
+✔        RETURN to main menu
 
     ELIF user inputs 1:
-        PRINT couriers list
+✔        PRINT couriers list
 
     # WEEK 4 UPDATE
     ELSE IF user input is 2:
         # CREATE new courier
 
-        GET user input for courier name
-        GET user input for courier phone number
-        CREATE new courier dictionary with above properties
-        APPEND courier dictionary to courier list
+✔        GET user input for courier name
+✔        GET user input for courier phone number
+✔        CREATE new courier dictionary with above properties
+✔        APPEND courier dictionary to courier list
 
     # WEEK 4 UPDATE
     ELSE IF user input is 3: 
         # STRETCH GOAL - UPDATE existing courier
 
-        PRINT courier with their index values
-        GET user input for courier index value
+✔        PRINT courier with their index values
+✔        GET user input for courier index value
 
         # iterate over the (key: value) pairs in the selected dictionary
         FOR EACH key-value pair in selected courier dictionary:
-            GET user input for updated property
+✔            GET user input for updated property
             IF user input is blank:
-                do not update this property and skip
+✔                do not update this property and skip
             ELSE:
-                update the property value with user input
+✔                update the property value with user input
 
     ELSE IF user input is 4:
         # STRETCH GOAL - DELETE courier
             
-        PRINT courier list
-        GET user input for courier index value
-        DELETE courier dictionary at index in courier list
+✔        PRINT courier list
+✔        GET user input for courier index value
+✔        DELETE courier dictionary at index in courier list
 
 # orders menu
 ELSE IF user input is 3:
     IF user input is 0:
-        RETURN to main menu
+✔        RETURN to main menu
 
     ELSE IF user input is 1:
-        PRINT orders list
+✔        PRINT orders list
 
     # WEEK 4 UPDATE
     ELSE IF user input is 2:
-        GET user input for customer name
-        GET user input for customer address
-        GET user input for customer phone number
+✔        GET user input for customer name
+✔        GET user input for customer address
+✔        GET user input for customer phone number
 
-        PRINT products list with its index values
-        GET user inputs for comma-separated list of product index values
-        CONVERT above user input to a string e.g. "2,1,3"
+✔        PRINT products list with its index values
+✔        GET user inputs for comma-separated list of product index values
+✔        CONVERT above user input to a string e.g. "2,1,3"
 
-        PRINT couriers list with index value for each courier
-        GET user input for courier index
-        SET order status to be 'PREPARING'
+✔        PRINT couriers list with index value for each courier
+✔        GET user input for courier index
+✔        SET order status to be 'PREPARING'
 
-        CREATE new order dictionary with above properties
-        APPEND order dictionary to orders list
+✔        CREATE new order dictionary with above properties
+✔        APPEND order dictionary to orders list
 
     ELSE IF user input is 3:
         # UPDATE existing order status

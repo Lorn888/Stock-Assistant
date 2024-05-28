@@ -73,7 +73,7 @@ while True:
         # SAVE products list to products.csv
         try:
             header = ["name", "price"]
-            with open("week3/data/products.csv", "w", newline="") as file:
+            with open("week4/data/products.csv", "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=header)
                 writer.writeheader()
                 for row in products_list:
@@ -83,7 +83,7 @@ while True:
         # SAVE couriers list to couriers.txt
         try:
             header = ["name", "phone"]
-            with open("week3/data/couriers.csv", "w", newline="") as file:
+            with open("week4/data/couriers.csv", "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=header)
                 writer.writeheader()
                 for row in couriers_list:
@@ -100,7 +100,7 @@ while True:
                 "status",
                 "items",
             ]
-            with open("week3/data/orders.csv", "w", newline="") as file:
+            with open("week4/data/orders.csv", "w", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=header)
                 writer.writeheader()
                 for row in orders_list:
@@ -158,7 +158,6 @@ while True:
                         # update the property value with user input
                         products_list[product_to_update_input][i] = user_input
                     
-
             elif product_menu_input == 4:
                 # PRINT products list
                 for product in products_list:
@@ -182,9 +181,14 @@ while True:
                 print(couriers_list)
             elif courier_menu_input == 2:
                 # GET user input for courier name
-                new_courier_input = input("Type new couriers nema:")
-                # APPEND courier name to couriers list
-                couriers_list.append(new_courier_input)
+                new_courier_input = input("Type new couriers name:")
+                # GET user input for courier phone number
+                new_courier_number = input("Type new couriers number:")
+                # CREATE new courier dictionary with above properties
+                new_courier = {"name": new_courier_input,
+                               "phone": new_courier_number}
+# APPEND courier dictionary to courier list
+                couriers_list.append(new_courier)
             elif courier_menu_input == 3:
                 for courier in couriers_list:
                     # PRINT courier names with its index value
@@ -192,9 +196,16 @@ while True:
                 # GET user input for courier index value
                 update_courier_input = int(input("Chose courier to update"))
                 # GET user input for new courier name
-                new_courier_input = input("Type new couriers name")
-                # UPDATE courier name at index in couriers list
-                couriers_list[update_courier_input] = new_courier_input
+                
+                for i in couriers_list[update_courier_input]:
+                    # GET user input for updated property
+                    user_input = input(i)
+                    if len(user_input)<= 0:
+                        # do not update this property and skip
+                        couriers_list[update_courier_input][i] = [i]
+                    else:
+                        # update the property value with user input
+                        couriers_list[update_courier_input][i] = user_input  
             elif courier_menu_input == 4:
                 # PRINT courier list
                 for courier in couriers_list:
@@ -203,9 +214,7 @@ while True:
                 delete_courier_input = int(input("Chose courier to delete"))
                 # DELETE courier at index in courier list
                 couriers_list.remove(couriers_list[delete_courier_input])
-
     elif main_menu_input == 3:
-
         while True:
 
             print(orders_menu_options)
@@ -221,7 +230,7 @@ while True:
 
             elif orders_menu_input == 2:
                 # GET user input for customer name
-                customer_name_input = input("Insert Customer name eg.'Harry Potter'")
+                customer_name_input = input("Insert Customer name")
                 # name_list = customer_name_input.split(" ")
                 # print(name_list)
                 # GET user input for customer address
@@ -230,8 +239,13 @@ while True:
                 )
                 # GET user input for customer phone number
                 customer_phone_input = input(
-                    "Insert Customer phone number eg.'0789887334'"
+                    "Insert Customer phone number"
                 )
+                        # PRINT products list with its index values
+                for product in products_list:
+                    print(f"{products_list.index(product)}-{product}")
+                # GET user inputs for comma-separated list of product index values
+                prod_index_val_input = input("type comma-separated list of product index values")
                 # PRINT couriers list with index value for each courier
                 for courier in couriers_list:
                     print(f"{couriers_list.index(courier)}-{courier}")
@@ -239,12 +253,15 @@ while True:
                 select_courier_input = int(input("Select a courier"))
 
                 customer_order = {
-                    "name": customer_name_input,
-                    "address": customer_adress_input,
-                    "phone": customer_phone_input,
-                    "order_status": order_status[0],
-                    "courier": couriers_list[select_courier_input],
+                    "customer_name": customer_name_input,
+                    "customer_address": customer_adress_input,
+                    "customer_phone": customer_phone_input,
+                    #  SET order status to be 'PREPARING'
+                    "courier": select_courier_input,
+                    "status": order_status[0],
+                    "items": prod_index_val_input
                 }
+                # APPEND order dictionary to orders list
                 orders_list.append(customer_order)
 
             elif orders_menu_input == 3:
