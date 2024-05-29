@@ -306,7 +306,7 @@ while True:
                             print(f"{order_status.index(status)}-{status}")
                     # GET user input for updated property
                     update_input = input(i)
-                    # update the property value with user input
+                        # do not update this property
                     if len(update_input) <= 0:
                         
                         orders_list[order_to_update][i] = orders_list[order_to_update][
@@ -318,7 +318,7 @@ while True:
                         else:
                             orders_list[order_to_update]["status"]= order_status[int(update_input)]
                     else:
-                        # do not update this property
+                    # update the property value with user input
                         orders_list[order_to_update][i] = update_input
 
             elif orders_menu_input == 5:
