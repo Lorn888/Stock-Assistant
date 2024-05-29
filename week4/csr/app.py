@@ -298,16 +298,28 @@ while True:
                 order_to_update = int(input("Chose order to update"))
                 # FOR EACH key-value pair in selected order:
                 for i in orders_list[order_to_update]:
+                    if i == "courier":
+                        for courier_dict in couriers_list:
+                            print(f"{couriers_list.index(courier_dict)}-{courier_dict['name']}")
+                    elif i == "status":
+                        for status in order_status:
+                            print(f"{order_status.index(status)}-{status}")
                     # GET user input for updated property
                     update_input = input(i)
                     # update the property value with user input
-                    if len(update_input) > 0:
-                        orders_list[order_to_update][i] = update_input
-                    else:
-                        # do not update this property
+                    if len(update_input) <= 0:
+                        
                         orders_list[order_to_update][i] = orders_list[order_to_update][
                             i
                         ]
+                    elif i == "status":
+                        if len(update_input) <= 0:
+                            orders_list[order_to_update][i] = update_input
+                        else:
+                            orders_list[order_to_update]["status"]= order_status[int(update_input)]
+                    else:
+                        # do not update this property
+                        orders_list[order_to_update][i] = update_input
 
             elif orders_menu_input == 5:
                 # PRINT orders list
