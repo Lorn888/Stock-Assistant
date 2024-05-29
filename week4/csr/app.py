@@ -27,9 +27,9 @@ try:
 except Exception as e:
     print(e)
 
-print(orders_list)
-print(couriers_list)
-print(products_list)
+# print(orders_list)
+# print(couriers_list)
+# print(products_list)
 
 
 # CREATE order status list
@@ -110,6 +110,7 @@ while True:
         # EXIT app
         break
 
+    # Product Menu
     elif main_menu_input == 1:
         while True:
             # PRINT product menu options
@@ -135,14 +136,14 @@ while True:
                 # CREATE new product dictionary with above properties
                 new_product = {
                     "name": new_product_input,
-                    "price": new_product_price_input
+                    "price": new_product_price_input,
                 }
-            # APPEND product dictionary to products list
+                # APPEND product dictionary to products list
                 products_list.append(new_product)
 
             elif product_menu_input == 3:
 
-                    # PRINT product names with its index value
+                # PRINT product names with its index value
                 for product in products_list:
                     print(f"{products_list.index(product)}-{product}")
                 # GET user input for product index value
@@ -153,11 +154,13 @@ while True:
                     user_input = input(i)
                     if len(user_input) <= 0:
                         # do not update this property and skip
-                        products_list[product_to_update_input][i] = i
+                            products_list[product_to_update_input][i] = products_list[product_to_update_input][i]
                     else:
+                        if i == "price":
+                            user_input = float(user_input)
                         # update the property value with user input
                         products_list[product_to_update_input][i] = user_input
-                    
+
             elif product_menu_input == 4:
                 # PRINT products list
                 for product in products_list:
@@ -167,6 +170,8 @@ while True:
                 # DELETE product at index in products list
                 products_list.remove(products_list[product_to_delete])
                 print(products_list)
+
+    # Couriers Menu
     elif main_menu_input == 2:
         while True:
             # PRINT courier menu options
@@ -185,9 +190,8 @@ while True:
                 # GET user input for courier phone number
                 new_courier_number = input("Type new couriers number:")
                 # CREATE new courier dictionary with above properties
-                new_courier = {"name": new_courier_input,
-                               "phone": new_courier_number}
-# APPEND courier dictionary to courier list
+                new_courier = {"name": new_courier_input, "phone": new_courier_number}
+                # APPEND courier dictionary to courier list
                 couriers_list.append(new_courier)
             elif courier_menu_input == 3:
                 for courier in couriers_list:
@@ -196,16 +200,16 @@ while True:
                 # GET user input for courier index value
                 update_courier_input = int(input("Chose courier to update"))
                 # GET user input for new courier name
-                
+
                 for i in couriers_list[update_courier_input]:
                     # GET user input for updated property
                     user_input = input(i)
-                    if len(user_input)<= 0:
+                    if len(user_input) <= 0:
                         # do not update this property and skip
                         couriers_list[update_courier_input][i] = [i]
                     else:
                         # update the property value with user input
-                        couriers_list[update_courier_input][i] = user_input  
+                        couriers_list[update_courier_input][i] = user_input
             elif courier_menu_input == 4:
                 # PRINT courier list
                 for courier in couriers_list:
@@ -214,6 +218,8 @@ while True:
                 delete_courier_input = int(input("Chose courier to delete"))
                 # DELETE courier at index in courier list
                 couriers_list.remove(couriers_list[delete_courier_input])
+
+    # Orders Menu
     elif main_menu_input == 3:
         while True:
 
@@ -238,14 +244,14 @@ while True:
                     "Insert Customer adress eg.'Unit 2, 12 Main Street, LONDON, WH1 2ER'"
                 )
                 # GET user input for customer phone number
-                customer_phone_input = input(
-                    "Insert Customer phone number"
-                )
-                        # PRINT products list with its index values
+                customer_phone_input = input("Insert Customer phone number")
+                # PRINT products list with its index values
                 for product in products_list:
                     print(f"{products_list.index(product)}-{product}")
                 # GET user inputs for comma-separated list of product index values
-                prod_index_val_input = input("type comma-separated list of product index values")
+                prod_index_val_input = input(
+                    "type comma-separated list of product index values"
+                )
                 # PRINT couriers list with index value for each courier
                 for courier in couriers_list:
                     print(f"{couriers_list.index(courier)}-{courier}")
@@ -259,7 +265,7 @@ while True:
                     #  SET order status to be 'PREPARING'
                     "courier": select_courier_input,
                     "status": order_status[0],
-                    "items": prod_index_val_input
+                    "items": prod_index_val_input,
                 }
                 # APPEND order dictionary to orders list
                 orders_list.append(customer_order)
@@ -280,9 +286,9 @@ while True:
                     input("What would you like to update it to?")
                 )
                 # UPDATE status for order
-                orders_list[order_status_to_update_input]["status"] = (
-                    order_status[updated_status_input]
-                )
+                orders_list[order_status_to_update_input]["status"] = order_status[
+                    updated_status_input
+                ]
 
             elif orders_menu_input == 4:
                 # PRINT orders list with its index values
