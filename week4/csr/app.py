@@ -40,42 +40,30 @@ while True:
 
     if main_menu_input == 0:
         # SAVE products list to products.csv
-        try:
-            header = ["name", "price"]
-            with open("week4/data/products.csv", "w", newline="") as file:
-                writer = csv.DictWriter(file, fieldnames=header)
-                writer.writeheader()
-                for row in products_list:
-                    writer.writerow(row)
-        except Exception as e:
-            print(e)
-        # SAVE couriers list to couriers.txt
-        try:
-            header = ["name", "phone"]
-            with open("week4/data/couriers.csv", "w", newline="") as file:
-                writer = csv.DictWriter(file, fieldnames=header)
-                writer.writeheader()
-                for row in couriers_list:
-                    writer.writerow(row)
-        except Exception as e:
-            print(e)
-        # SAVE orders list to order.csv
-        try:
-            header = [
-                "customer_name",
-                "customer_address",
-                "customer_phone",
-                "courier",
-                "status",
-                "items",
-            ]
-            with open("week4/data/orders.csv", "w", newline="") as file:
-                writer = csv.DictWriter(file, fieldnames=header)
-                writer.writeheader()
-                for row in orders_list:
-                    writer.writerow(row)
-        except Exception as e:
-            print(e)
+        def save_data_to_csv(file_path, data, header):
+            try:
+                with open(file_path, "w", newline="") as file:
+                    writer = csv.DictWriter(file, fieldnames=header)
+                    writer.writeheader()
+                    for row in data:
+                        writer.writerow(row)
+            except Exception as e:
+                print(e)
+
+        # Define header for each CSV file
+        products_header = ["name", "price"]
+        couriers_header = ["name", "phone"]
+        orders_header = ["customer_name", "customer_address", "customer_phone", "courier", "status", "items"]
+
+        # Define file paths
+        products_file_path = "week4/data/products.csv"
+        couriers_file_path = "week4/data/couriers.csv"
+        orders_file_path = "week4/data/orders.csv"
+
+        # Save data to CSV files
+        save_data_to_csv(products_file_path, products_list, products_header)
+        save_data_to_csv(couriers_file_path, couriers_list, couriers_header)
+        save_data_to_csv(orders_file_path, orders_list, orders_header)
         # EXIT app
         break
 
