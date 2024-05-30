@@ -2,7 +2,7 @@ import csv
 
 # LOAD products list from products.txt
 try:
-    with open("week3//data//products.csv", "r") as file:
+    with open("D:\OneDrive\Desktop\VSCode\DE-PC\Mini-Project-GIT\Patryk-miniproject\week3\data\products.csv", "r") as file:
         reader = csv.reader(file)
         for products_list in reader:
             print(products_list)
