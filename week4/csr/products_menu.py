@@ -1,11 +1,11 @@
 def products_menu(products_list):
     product_menu_options = [
-    "0-Return to the Main Menu",
-    "1-Products List",
-    "2-Create New Product",
-    "3-Update EXisting Product",
-    "4-Delete Product",
-]
+        "0-Return to the Main Menu",
+        "1-Products List",
+        "2-Create New Product",
+        "3-Update EXisting Product",
+        "4-Delete Product",
+    ]
     while True:
         # PRINT product menu options
         print(product_menu_options)
@@ -24,9 +24,7 @@ def products_menu(products_list):
             # GET user input for product name
             new_product_input = input("type the name of the new product")
             # GET user input for product price
-            new_product_price_input = float(
-                input("type the price of the new product")
-            )
+            new_product_price_input = float(input("type the price of the new product"))
             # CREATE new product dictionary with above properties
             new_product = {
                 "name": new_product_input,
@@ -48,7 +46,9 @@ def products_menu(products_list):
                 user_input = input(i)
                 if len(user_input) <= 0:
                     # do not update this property and skip
-                        products_list[product_to_update_input][i] = products_list[product_to_update_input][i]
+                    products_list[product_to_update_input][i] = products_list[
+                        product_to_update_input
+                    ][i]
                 else:
                     if i == "price":
                         user_input = float(user_input)

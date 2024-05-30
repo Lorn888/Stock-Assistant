@@ -1,9 +1,10 @@
 from products_menu import products_menu
 from couriers_menu import couriers_menu
 from orders_menu import orders_menu
-
 import csv
 
+
+# Loading Data function
 def load_data_from_csv(file_path):
     data = []
     try:
@@ -13,6 +14,7 @@ def load_data_from_csv(file_path):
     except Exception as e:
         print(e)
     return data
+
 
 # Define file paths
 products_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-miniproject/data/products.csv"
@@ -31,7 +33,6 @@ order_status = ["PREPARING", "READY", "SHIPPED"]
 main_menu_options = ["0-Exit App", "1-Product Menu", "2-Couriers Menu", "3-Orders Menu"]
 
 
-
 while True:
     # PRINT main menu options
     print(main_menu_options)
@@ -39,7 +40,7 @@ while True:
     main_menu_input = int(input("Chose from the above 3 options '0-3'"))
 
     if main_menu_input == 0:
-        # SAVE products list to products.csv
+        # Save data to csv function
         def save_data_to_csv(file_path, data, header):
             try:
                 with open(file_path, "w", newline="") as file:
@@ -53,7 +54,14 @@ while True:
         # Define header for each CSV file
         products_header = ["name", "price"]
         couriers_header = ["name", "phone"]
-        orders_header = ["customer_name", "customer_address", "customer_phone", "courier", "status", "items"]
+        orders_header = [
+            "customer_name",
+            "customer_address",
+            "customer_phone",
+            "courier",
+            "status",
+            "items",
+        ]
 
         # Define file paths
         products_file_path = "week4/data/products.csv"
@@ -70,11 +78,11 @@ while True:
     # Product Menu
     elif main_menu_input == 1:
         products_menu(products_list)
-        
+
     # Couriers Menu
     elif main_menu_input == 2:
         couriers_menu(couriers_list)
 
     # Orders Menu
     elif main_menu_input == 3:
-        orders_menu(orders_list,order_status,couriers_list, products_list)
+        orders_menu(orders_list, order_status, couriers_list, products_list)
