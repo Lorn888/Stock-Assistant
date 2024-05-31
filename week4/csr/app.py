@@ -2,7 +2,11 @@ from products_menu import products_menu
 from couriers_menu import couriers_menu
 from orders_menu import orders_menu
 import csv
+import os
 
+# Clear screen function
+def clear_screen():
+    os.system('cls')
 
 # Loading Data function
 def load_data_from_csv(file_path):
@@ -30,15 +34,23 @@ orders_list = load_data_from_csv(orders_file_path)
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
-main_menu_options = ["0-Exit App", "1-Product Menu", "2-Couriers Menu", "3-Orders Menu"]
+def print_main_menu():
+    print("===================================")
+    print("            MAIN MENU              ")
+    print("===================================")
+    print("0. Exit")
+    print("1. Products Menu")
+    print("2. Couriers Menu")
+    print("3. Orders Menu")
+    print("===================================")
 
 
 while True:
-    # PRINT main menu options
-    print(main_menu_options)
+    # PRINT main me9nu options
+    print_main_menu()
     # GET user input for main menu option
-    main_menu_input = int(input("Chose from the above 3 options '0-3'"))
-
+    main_menu_input = int(input("Please enter your choice (0-3): "))
+    clear_screen()
     if main_menu_input == 0:
         # Save data to csv function
         def save_data_to_csv(file_path, data, header):
@@ -63,10 +75,6 @@ while True:
             "items",
         ]
 
-        # Define file paths
-        products_file_path = "week4/data/products.csv"
-        couriers_file_path = "week4/data/couriers.csv"
-        orders_file_path = "week4/data/orders.csv"
 
         # Save data to CSV files
         save_data_to_csv(products_file_path, products_list, products_header)

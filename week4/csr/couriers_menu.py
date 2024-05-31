@@ -1,16 +1,27 @@
+import os
+
+# Clear screen function
+def clear_screen():
+    os.system('cls')
+
+def print_couriers_menu():
+    print("===================================")
+    print("           COURIERS MENU           ")
+    print("===================================")
+    print("0. Return to the Main Menu")
+    print("1. Print courier list")
+    print("2. Create a new Courier")
+    print("3. Update Existing Courier")
+    print("4. Delete Order")
+    print("===================================")
+
 def couriers_menu(couriers_list):
-    courier_menu_options = [
-        "0-Return to the Main Menu",
-        "1-Print courier list",
-        "2-Create a new Courier",
-        "3-Update Existing Courier",
-        "4-Delete Order",
-    ]
     while True:
         # PRINT courier menu options
-        print(courier_menu_options)
+        print_couriers_menu()
         # GET user input for courier menu option
-        courier_menu_input = int(input("Chose from above courier menu"))
+        courier_menu_input = int(input("Please enter your choice (0-4): "))
+        clear_screen()
         if courier_menu_input == 0:
             # RETURN to main menu
             break

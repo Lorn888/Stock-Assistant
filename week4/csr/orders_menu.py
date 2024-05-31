@@ -1,18 +1,29 @@
+import os
+
+# Clear screen function
+def clear_screen():
+    os.system('cls')
+
+def print_orders_menu():
+    print("===================================")
+    print("            ORDERS MENU            ")
+    print("===================================")
+    print("0. Return to the Main Menu")
+    print("1. Print orders dictionary")
+    print("2. Create a new order")
+    print("3. Update Existing Order Status")
+    print("4. Update Existing Order")
+    print("5. Delete Order")
+    print("===================================")
+
+
 def orders_menu(orders_list, order_status, couriers_list, products_list):
-    orders_menu_options = [
-        "0-Return to the Main Menu",
-        "1-Print orders dictionary",
-        "2-Create a new order",
-        "3-Update Existing Order Status",
-        "4-Update Existing Order",
-        "5-Delete Order",
-    ]
     while True:
         # Print orders menu options
-        print(orders_menu_options)
+        print_orders_menu()
         # GET user input for orders menu option
-        orders_menu_input = int(input("Chose from above Orders Menu"))
-
+        orders_menu_input = int(input("Please enter your choice (0-5): "))
+        clear_screen()
         if orders_menu_input == 0:
             #  RETURN to main menu
             break
