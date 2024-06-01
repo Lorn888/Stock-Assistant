@@ -4,9 +4,18 @@ import os
 def clear_screen():
     os.system('cls')
 
+def get_number_input(prompt):
+    while True:
+        user_input = input(prompt)
+        try:
+            number = float(user_input)
+            return number  # Return the number if input is valid
+        except ValueError:
+            print("Error: Please enter a valid number.")
+
 def print_orders_menu():
     print("===================================")
-    print("            ORDERS MENU            ")
+    print("||          ORDERS MENU          ||")
     print("===================================")
     print("0. Return to the Main Menu")
     print("1. Print orders dictionary")
@@ -74,7 +83,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                 print(f"{orders_list.index(order)}-{order}")
             # GET user input for order index value
             order_status_to_update_input = int(
-                input("Chose the order to update the status of")
+                get_number_input("Chose the order to update the status of")
             )
             # PRINT order status list with index values
             for status in order_status:

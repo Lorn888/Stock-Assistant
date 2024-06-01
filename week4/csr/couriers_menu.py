@@ -6,7 +6,7 @@ def clear_screen():
 
 def print_couriers_menu():
     print("===================================")
-    print("           COURIERS MENU           ")
+    print("||         COURIERS MENU         ||")
     print("===================================")
     print("0. Return to the Main Menu")
     print("1. Print courier list")
