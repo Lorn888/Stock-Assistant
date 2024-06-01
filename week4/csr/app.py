@@ -1,54 +1,9 @@
 from products_menu import products_menu
 from couriers_menu import couriers_menu
 from orders_menu import orders_menu
+from helper_functions import get_number_input, clear_screen,load_data_from_csv, save_data_to_csv, print_main_menu
 import csv
-import os
 
-def get_number_input(prompt, empty="empty"):
-    while True:
-        user_input = input(prompt)
-        try:
-            if empty =="not empty":
-                if len(user_input) > 0:
-                    number = int(user_input)
-                    return number
-                else:
-                    print("This can not be empty")
-            elif empty == "empty":
-                if len(user_input) > 0:
-                    number = int(user_input)
-                    return number
-                else:
-                    return user_input
-                  # Return the number if input is valid
-        except ValueError:
-            print("Error: Please enter a valid number.")
-
-# Clear screen function
-def clear_screen():
-    os.system('cls')
-
-# Loading Data function
-def load_data_from_csv(file_path):
-    data = []
-    try:
-        with open(file_path, "r", newline="") as file:
-            reader = csv.DictReader(file)
-            data = [row for row in reader]
-    except Exception as e:
-        print(e)
-    return data
-
-# Saving Data function
-def save_data_to_csv(file_path, data, header):
-    try:
-        with open(file_path, "w", newline="") as file:
-            writer = csv.DictWriter(file, fieldnames=header)
-            writer.writeheader()
-            for row in data:
-                writer.writerow(row)
-    except Exception as e:
-        print(e)
 
 # Headers for each CSV file
 products_header = ["name", "price"]
@@ -75,15 +30,6 @@ orders_list = load_data_from_csv(orders_file_path)
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
-def print_main_menu():
-    print("===================================")
-    print("||          MAIN MENU            ||")
-    print("===================================")
-    print("0. Exit")
-    print("1. Products Menu")
-    print("2. Couriers Menu")
-    print("3. Orders Menu")
-    print("===================================")
 
 clear_screen()
 
