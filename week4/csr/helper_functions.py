@@ -1,6 +1,8 @@
 import os
 import csv
 
+order_status = ["PREPARING", "READY", "SHIPPED"]
+
 def get_number_input(prompt, index="no", empty="empty"):
     while True:
         user_input = input(prompt)
@@ -15,7 +17,7 @@ def get_number_input(prompt, index="no", empty="empty"):
                 if len(user_input) > 0:
                     number = int(user_input)
                     if index is not "no":
-                        if number <= index:
+                        if 0 <= number <= index:
                             return number
                         else:
                             print("Out of scope")

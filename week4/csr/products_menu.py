@@ -6,7 +6,7 @@ def products_menu(products_list):
         # PRINT product menu options
         print_products_menu()
         # GET user input for product menu option
-        product_menu_input = get_number_input("Please enter your choice (0-4): ")
+        product_menu_input = get_number_input("Please enter your choice (0-4): ",4)
         clear_screen()
         if product_menu_input == 0:
             # RETURN to main menu
@@ -54,7 +54,7 @@ def products_menu(products_list):
                     print(f"{products_list.index(product)}-{product}")
                 # GET user input for product index value
                 print("===================================")
-                product_to_update_input = get_number_input("Chose the product to update or press Enter to retrn to Products Menu: ")
+                product_to_update_input = get_number_input("Chose the product to update or press Enter to retrn to Products Menu: "(len(products_list)-1))
                 if product_to_update_input is not "":
                     for i in products_list[product_to_update_input]:
                         # GET user input for updated property
@@ -87,7 +87,7 @@ def products_menu(products_list):
                     print(f"{products_list.index(product)}-{product}")
             # GET user input for product index value
                 print("===================================")
-                product_to_delete = get_number_input("Chose the product to delete or press Enter to go back to Products Menu: ")
+                product_to_delete = get_number_input("Chose the product to delete or press Enter to go back to Products Menu: ",(len(products_list)-1))
                 if product_to_delete is not "":
             # DELETE product at index in products list
                     products_list.remove(products_list[product_to_delete])

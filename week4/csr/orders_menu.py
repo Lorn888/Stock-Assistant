@@ -1,4 +1,4 @@
-from helper_functions import get_number_input, clear_screen, print_orders_menu
+from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
 
@@ -11,7 +11,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
     def orders_list_with_index():
         for order in orders_list:
             print(f"{orders_list.index(order)}-{order}")
-
+    
     while True:
         clear_screen()
         # Print orders menu options
@@ -59,7 +59,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                             for courier in couriers_list:
                                 print(f"{couriers_list.index(courier)}-{courier}")
                             # GET user input for courier index to select courier
-                            select_courier_input = get_number_input("Select a courier")
+                            select_courier_input = get_number_input("Select a courier", (len(couriers_list)-1))
                             if select_courier_input is not "":
 
 
@@ -92,13 +92,13 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
             else:
                 orders_list_with_index()
                 # GET user input for order index value
-                order_status_to_update_input = get_number_input("Chose the order to update the status of of press Enter to return to Orders Menu")
+                order_status_to_update_input = get_number_input("Chose the order to update the status of of press Enter to return to Orders Menu",(len(orders_list)-1))
                 if order_status_to_update_input is not "":
                     # PRINT order status list with index values
                 
                     status_list_with_index()
                     # GET user input for order status index value
-                    updated_status_input = get_number_input("What would you like to update it to? Or press Enter to cancel changes")
+                    updated_status_input = get_number_input("What would you like to update it to? Or press Enter to cancel changes",(len(order_status)-1))
                     if updated_status_input is not "":
 
                     # UPDATE status for order
@@ -117,20 +117,20 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                 for order in orders_list:
                     print(f"{orders_list.index(order)}-{order}")
                 # GET user input for order index value
-                order_to_update = get_number_input("Chose order to update or press Enter to return to Orders Menu: ")
+                order_to_update = get_number_input("Chose order to update or press Enter to return to Orders Menu: ",(len(orders_list)-1))
                 if order_to_update is not "":
                 # FOR EACH key-value pair in selected order:
                     for i in orders_list[order_to_update]:
                         if i == "courier":
                             couriers_list_with_index()
-                            update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ")
+                            update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ", (len(couriers_list)-1))
                             if update_input is not "":
                                 orders_list[order_to_update][i] = update_input
                             else:
                                 continue                                    
                         elif i == "status":
                             status_list_with_index()
-                            update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ")
+                            update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ",(len(orders_list)-1))
                             if update_input is not "":
                                 orders_list[order_to_update][i] = update_input
                             else:
@@ -159,7 +159,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
             # PRINT orders list
                 orders_list_with_index()
                 # GET user input for order index value
-                order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu")
+                order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu",(len(orders_list)-1))
                 if order_to_delete is not "":
                 #   DELETE order at index in order list
                     del orders_list[order_to_delete]

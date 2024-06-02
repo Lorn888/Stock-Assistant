@@ -6,7 +6,7 @@ def couriers_menu(couriers_list):
         # PRINT courier menu options
         print_couriers_menu()
         # GET user input for courier menu option
-        courier_menu_input = get_number_input("Please enter your choice (0-4): ")
+        courier_menu_input = get_number_input("Please enter your choice (0-4): ",4)
         clear_screen()
         if courier_menu_input == 0:
             # RETURN to main menu
@@ -51,7 +51,7 @@ def couriers_menu(couriers_list):
                     print(f"{couriers_list.index(courier)}-{courier}")
                 # GET user input for courier index value
                 print("===================================")
-                update_courier_input = get_number_input("Chose courier to update or press Enter to return to Couriers Menu: ")
+                update_courier_input = get_number_input("Chose courier to update or press Enter to return to Couriers Menu: ",(len(couriers_list)-1))
                 # GET user input for new courier name
                 if update_courier_input is not "":
                     for i in couriers_list[update_courier_input]:
@@ -85,7 +85,7 @@ def couriers_menu(couriers_list):
                     print(f"{couriers_list.index(courier)}-{courier}")
                 # GET user input for courier index value
                 print("===================================")
-                delete_courier_input = get_number_input("Chose courier to delete or press Enter to go back to Couriers Menu: ")
+                delete_courier_input = get_number_input("Chose courier to delete or press Enter to go back to Couriers Menu: ", (len(couriers_list)-1))
                 if delete_courier_input is not "":
                         # DELETE courier at index in courier list
                     couriers_list.remove(couriers_list[delete_courier_input])
