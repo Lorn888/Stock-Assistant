@@ -1,4 +1,5 @@
 import os
+import csv
 
 def get_number_input(prompt, empty="empty"):
     while True:
@@ -54,4 +55,26 @@ def print_main_menu():
     print("1. Products Menu")
     print("2. Couriers Menu")
     print("3. Orders Menu")
+    print("===================================")
+
+def print_products_menu():
+    print("===================================")
+    print("||         PRODUCTS MENU         ||")
+    print("===================================")
+    print("0. Return to the Main Menu")
+    print("1. Products List")
+    print("2. Create New Product")
+    print("3. Update Existing Product")
+    print("4. Delete Product")
+    print("===================================")
+
+def print_couriers_menu():
+    print("===================================")
+    print("||         COURIERS MENU         ||")
+    print("===================================")
+    print("0. Return to the Main Menu")
+    print("1. Print courier list")
+    print("2. Create a new Courier")
+    print("3. Update Existing Courier")
+    print("4. Delete Order")
     print("===================================")
