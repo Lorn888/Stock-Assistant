@@ -2,7 +2,15 @@ from helper_functions import get_number_input, clear_screen, print_orders_menu
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
 
- 
+    def status_list_with_index():
+        for status in order_status:
+            print(f"{order_status.index(status)}-{status}")
+    def couriers_list_with_index():
+        for courier in couriers_list:
+            print(f"{couriers_list.index(courier)}-{courier}")
+    def orders_list_with_index():
+        for order in orders_list:
+            print(f"{orders_list.index(order)}-{order}")
 
     while True:
         clear_screen()
