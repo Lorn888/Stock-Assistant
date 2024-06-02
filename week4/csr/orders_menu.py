@@ -17,7 +17,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
         # Print orders menu options
         print_orders_menu()
         # GET user input for orders menu option
-        orders_menu_input = get_number_input("Please enter your choice (0-5): ")
+        orders_menu_input = get_number_input("Please enter your choice (0-5): ",5)
         clear_screen()
         if orders_menu_input == 0:
             #  RETURN to main menu

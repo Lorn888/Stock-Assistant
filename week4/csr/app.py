@@ -9,9 +9,9 @@ import csv
 products_header = ["name", "price"]
 couriers_header = ["name", "phone"]
 orders_header = [
-    "customer_name",
-    "customer_address",
-    "customer_phone",
+    "customer name",
+    "customer address",
+    "customer phone",
     "courier",
     "status",
     "items",
@@ -38,7 +38,7 @@ while True:
     # PRINT main me9nu options
     print_main_menu()
     # GET user input for main menu option
-    main_menu_input = get_number_input("Please enter your choice (0-3): ")
+    main_menu_input = get_number_input("Please enter your choice (0-3): ",3)
     clear_screen()
     if main_menu_input == 0:
 

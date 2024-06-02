@@ -1,7 +1,7 @@
 import os
 import csv
 
-def get_number_input(prompt, empty="empty"):
+def get_number_input(prompt, index="no", empty="empty"):
     while True:
         user_input = input(prompt)
         try:
@@ -14,7 +14,14 @@ def get_number_input(prompt, empty="empty"):
             elif empty == "empty":
                 if len(user_input) > 0:
                     number = int(user_input)
-                    return number
+                    if index is not "no":
+                        if number <= index:
+                            return number
+                        else:
+                            print("Out of scope")
+                    else:
+                        return number
+
                 else:
                     return user_input
                   # Return the number if input is valid
@@ -26,7 +33,7 @@ def clear_screen():
     os.system('cls')
 
 
-def load_data_from_csv(file_path):
+def load_data_from_csv(file_path): 
     data = []
     try:
         with open(file_path, "r", newline="") as file:
