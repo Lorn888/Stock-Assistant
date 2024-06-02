@@ -14,10 +14,13 @@ def couriers_menu(couriers_list):
 
         elif courier_menu_input == 1:
             # PRINT couriers list
-            for courier in couriers_list:
-                print(courier)
-                print("-----------")
-            input("Press enter to return to the Products Menu")
+            if len(couriers_list) == 0:
+                input("Couriers list is empty\nPress Enter to return")
+            else:
+                for courier in couriers_list:
+                    print(courier)
+                    print("-----------")
+                input("Press enter to return to the Couriers Menu")
 
         elif courier_menu_input == 2:
             # GET user input for courier name
@@ -40,7 +43,7 @@ def couriers_menu(couriers_list):
 
         elif courier_menu_input == 3:
             if len(couriers_list) == 0:
-                input("there is nothing to update!")
+                input("there is nothing to update!\nPress Enter to return")
             else:
                 for courier in couriers_list:
                     # PRINT courier names with its index value
@@ -75,7 +78,7 @@ def couriers_menu(couriers_list):
         elif courier_menu_input == 4:
             # PRINT courier list
             if len(couriers_list) == 0:
-                input("There is nothing to delete!")
+                input("There is nothing to delete!\nPress Enter to return")
             else:
                 for courier in couriers_list:
                     print("-----------")

@@ -14,11 +14,13 @@ def products_menu(products_list):
 
         elif product_menu_input == 1:
             # PRINT products list
-            
-            for product in products_list:
-                print (product)
-                print("-----------")
-            input("Press enter to return to the Products Menu")
+            if len(products_list) == 0:
+                input("Products list is empty\nPress Enter to return")
+            else:
+                for product in products_list:
+                    print (product)
+                    print("-----------")
+                input("Press enter to return to the Products Menu")
             
         elif product_menu_input == 2:
             # GET user input for product name
@@ -44,7 +46,7 @@ def products_menu(products_list):
 
         elif product_menu_input == 3:
             if len(products_list) == 0:
-                input("there is nothing to update!")
+                input("there is nothing to update!\nPress Enter to return")
             else:
             # PRINT product names with its index value
                 for product in products_list:
@@ -78,7 +80,7 @@ def products_menu(products_list):
         elif product_menu_input == 4:
             # PRINT products list
             if len(products_list) == 0:
-                input("there is nothing to delete!")
+                input("there is nothing to delete!\nPress Enter to return")
             else:
                 for product in products_list:
                     print("-----------")
