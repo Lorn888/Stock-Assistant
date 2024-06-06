@@ -2,8 +2,6 @@ from products_menu import products_menu
 from couriers_menu import couriers_menu
 from orders_menu import orders_menu
 from helper_functions import get_number_input, clear_screen,load_data_from_csv, save_data_to_csv, print_main_menu
-import csv
-
 
 # Headers for each CSV file
 products_header = ["name", "price"]
@@ -26,6 +24,8 @@ orders_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-min
 products_list = load_data_from_csv(products_file_path)
 couriers_list = load_data_from_csv(couriers_file_path)
 orders_list = load_data_from_csv(orders_file_path)
+
+print(orders_list)
 
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]

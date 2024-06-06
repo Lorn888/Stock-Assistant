@@ -3,6 +3,15 @@ import csv
 
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
+def group_by_key_value(data_list, key):
+    grouped_dict = {}
+    for dictionary in data_list:
+        if dictionary[key] not in grouped_dict:
+            grouped_dict[dictionary[key]] = [dictionary]
+        else:
+            grouped_dict[dictionary[key]].append(dictionary)
+    return grouped_dict
+
 def get_number_input(prompt, index="no", empty="empty"):
     while True:
         user_input = input(prompt)

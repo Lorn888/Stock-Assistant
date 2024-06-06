@@ -54,7 +54,7 @@ def products_menu(products_list):
                     print(f"{products_list.index(product)}-{product}")
                 # GET user input for product index value
                 print("===================================")
-                product_to_update_input = get_number_input("Chose the product to update or press Enter to retrn to Products Menu: "(len(products_list)-1))
+                product_to_update_input = get_number_input("Chose the product to update or press Enter to retrn to Products Menu: ",(len(products_list)-1))
                 if product_to_update_input is not "":
                     for i in products_list[product_to_update_input]:
                         # GET user input for updated property

@@ -1,4 +1,6 @@
-from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status
+from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status,group_by_key_value
+
+
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
 
@@ -28,9 +30,25 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
             if len(orders_list) == 0:
                 input("Orders list is empty\nPress Enter to return")
             else:
-                for order in orders_list:
-                    print(order)
+                keys = []
+                for key in orders_list[0]:
+                    keys.append(key)
+            
+                for key in keys:
+                    print(f"{keys.index(key)}-{key}")
+
+
+                    
+                user_input = get_number_input("What would you like to group it by: ")
+                grouped_orders = group_by_key_value(orders_list, keys[user_input])
+
+                for status in grouped_orders:
+                    print(status)
+                    for order in grouped_orders[status]:
+                        print(order)
                     print("-----------")
+                # for order in orders_list:
+                #     print(order)
                 input("Press enter to return to the Orders Menu")
 
         elif orders_menu_input == 2:
