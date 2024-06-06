@@ -4,22 +4,36 @@ CREATE DATABASE patrykdb;
 
 USE patrykdb;
 
-CREATE TABLE `order` (
-  order_id INT NOT NULL AUTO_INCREMENT,
-  customer_name VARCHAR(255) NOT NULL,
-  customer_address VARCHAR(255) NOT NULL,
-  customer_phone VARCHAR(255) NOT NULL,  -- Added customer_phone column
-  courier VARCHAR(255) NOT NULL,
-  `status` VARCHAR(255) NOT NULL,
-  items VARCHAR(255),  
-  PRIMARY KEY(order_id)
+CREATE TABLE products (
+  product_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  price VARCHAR(255) NOT NULL,
+  PRIMARY KEY(product_id)
 );
 
-INSERT INTO `order` (customer_name, customer_address, customer_phone, courier, `status`, items) 
-VALUES 
-('John', 'Unit 2, 12 Main Street, LONDON, WH1 2ER', '0789887334', '2', 'PREPARING', '1,3,4'),
-('Jane', 'Flat 5, 34 Market Road, LONDON, NW3 6GH', '0798765432', '1', 'DISPATCHED', '2,5'),
-('Mike', 'House 9, 78 High Street, MANCHESTER, MN4 5KL', '0712345678', '3', 'DELIVERED', '3'),
-('Emily', 'Apt 4, 56 Broadway, LEEDS, LD2 7YU', '0734567890', '2', 'PENDING', '2,4,6');
+CREATE TABLE couriers (
+  courier_id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  phone VARCHAR(255) NOT NULL,
+  PRIMARY KEY(courier_id)
+);
 
-SELECT * FROM `order` ORDER BY order_id ASC;
+-- Insert data into the products table
+INSERT INTO products (name, price) 
+VALUES ('coke-zero', '0.6'),
+       ('corona', '4.0'),
+       ('water', '1.0'),
+       ('sprite', '0.6');
+
+-- Insert data into the couriers table
+INSERT INTO couriers (name, phone) 
+VALUES ('Tomek', '0789887889'),
+       ('Mike', '0789887889'),
+       ('Sudesh', '0789887889'),
+       ('Hammed', '0789887889');
+
+-- Select all records from the products table
+SELECT * FROM products ORDER BY product_id ASC;
+
+-- Select all records from the couriers table
+SELECT * FROM couriers ORDER BY courier_id ASC;

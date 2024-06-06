@@ -21,19 +21,33 @@ try:
 
         # Create a cursor object to execute SQL queries
         with connection.cursor() as cursor:
-            # Example: Inserting a new record into a table
-            sql_insert = "INSERT INTO `order` (customer_name, customer_address, courier, `status`, items) VALUES (%s, %s, %s, %s, %s)"
-            data = ("John", "Unit 2, 12 Main Street, LONDON, WH1 2ER", "0789887334", "2", "PREPARING")
-            cursor.execute(sql_insert, data)
+            # Inserting a new record into the couriers table
+            sql_insert_courier = "INSERT INTO couriers (name, phone) VALUES (%s, %s)"
+            courier_data = ("Tomek", "0789887889")
+            cursor.execute(sql_insert_courier, courier_data)
             connection.commit()
 
-            # Example: Selecting records from a table
-            sql_select = "SELECT * FROM `order`"
-            cursor.execute(sql_select)
-            result = cursor.fetchall()
+            # Inserting a new record into the products table
+            sql_insert_product = "INSERT INTO products (name, price) VALUES (%s, %s)"
+            product_data = ("coke-zero", "0.6")
+            cursor.execute(sql_insert_product, product_data)
+            connection.commit()
 
-            # Process the query result
-            for row in result:
+            # Example: Selecting records from a table (just for verification)
+            sql_select_products = "SELECT * FROM products"
+            cursor.execute(sql_select_products)
+            products_result = cursor.fetchall()
+
+            print("Products table:")
+            for row in products_result:
+                print(row)
+
+            sql_select_couriers = "SELECT * FROM couriers"
+            cursor.execute(sql_select_couriers)
+            couriers_result = cursor.fetchall()
+
+            print("Couriers table:")
+            for row in couriers_result:
                 print(row)
 
 except pymysql.Error as e:
