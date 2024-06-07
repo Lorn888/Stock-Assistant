@@ -2,6 +2,10 @@ from products_menu import products_menu
 from couriers_menu import couriers_menu
 from orders_menu import orders_menu
 from helper_functions import get_number_input, clear_screen,load_data_from_csv, save_data_to_csv, print_main_menu
+from db_operation import fetch_products, fetch_couriers
+
+products_list = fetch_products()
+couriers_list = fetch_couriers()
 
 # Headers for each CSV file
 products_header = ["name", "price"]
@@ -21,8 +25,8 @@ couriers_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-m
 orders_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-miniproject/data/orders.csv"
 
 # Loading data from CSV files
-products_list = load_data_from_csv(products_file_path)
-couriers_list = load_data_from_csv(couriers_file_path)
+# products_list = load_data_from_csv(products_file_path)
+# couriers_list = load_data_from_csv(couriers_file_path)
 orders_list = load_data_from_csv(orders_file_path)
 
 print(orders_list)
@@ -38,6 +42,8 @@ while True:
     # PRINT main me9nu options
     print_main_menu()
     # GET user input for main menu option
+    print(products_list)
+    print(couriers_list)
     main_menu_input = get_number_input("Please enter your choice (0-3): ",3)
     clear_screen()
     if main_menu_input == 0:
