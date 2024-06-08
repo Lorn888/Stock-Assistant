@@ -24,7 +24,7 @@ def get_number_input(prompt, input_type="number", index=None, allow_empty=False)
                 number = float(user_input)
                 if number.is_integer():
                     number = int(number)
-                if index is not None and (number < 1 or number > index):
+                if index is not None and (number < 0 or number > index):
                     print(f"Error: Please enter a number between 0 and {index}.")
                 else:
                     return number
