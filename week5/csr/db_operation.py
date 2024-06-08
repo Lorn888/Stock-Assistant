@@ -103,6 +103,18 @@ def update_product_price(product_id, price):
     finally:
         connection.close()
  
+def update_courier_phone(courier_id, phone):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_update = "UPDATE couriers SET phone = %s WHERE courier_id = %s"
+            cursor.execute(sql_update, (phone, courier_id))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+ 
 def update_product_name(product_id, name):
     try:
         connection = get_db_connection()
@@ -115,14 +127,39 @@ def update_product_name(product_id, name):
     finally:
         connection.close()
 
+def update_courier_name(courier_id, name):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_update = "UPDATE couriers SET name = %s WHERE courier_id = %s"
+            cursor.execute(sql_update, (name, courier_id))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+
 def delete_product(product_id):
     try:
         connection = get_db_connection()
         with connection.cursor() as cursor:
             sql_delete = "DELETE FROM products WHERE product_id = %s"
-            cursor.execute(sql_delete, (product_id,))
+            cursor.execute(sql_delete, (product_id))
             connection.commit()
             print("Product deleted successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+
+def delete_courier(courier_id):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_delete = "DELETE FROM couriers WHERE courier_id = %s"
+            cursor.execute(sql_delete, (courier_id))
+            connection.commit()
+            print("Courier deleted successfully.")
     except Exception as e:
         print(f"Error: {e}")
     finally:

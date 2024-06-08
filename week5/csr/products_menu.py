@@ -1,5 +1,5 @@
 from helper_functions import get_number_input, clear_screen, print_products_menu
-from db_operation import fetch_products, create_product  , update_product_price, update_product_name, delete_product
+from db_operation import fetch_products, create_product  , update_product_price, update_product_name, delete_product, delete_courier
 
 def products_menu():
     while True:
@@ -46,12 +46,7 @@ def products_menu():
                 print("===================================")
                 
                 while True:
-                    product_to_update_input = get_number_input(
-                        "Choose the product to update or press Enter to return to Products Menu: ",
-                        "number",
-                        None,
-                        True
-                    )
+                    product_to_update_input = get_number_input("Choose the product to update or press Enter to return to Products Menu: ","number",None,True)
                     if product_to_update_input == "":
                         break
 
@@ -99,7 +94,6 @@ def products_menu():
                 for product in products_list:
                     print("-----------")
                     print(f"{product['product_id']}: {product['name']} - £{product['price']}")
-                # GET user input for product index value
                 print("===================================")
                 
                 while True:

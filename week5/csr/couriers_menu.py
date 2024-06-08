@@ -1,5 +1,5 @@
 from helper_functions import get_number_input, clear_screen, print_couriers_menu 
-from db_operation import fetch_couriers, create_courier
+from db_operation import fetch_couriers, create_courier, update_courier_phone, update_courier_name, delete_courier
 
 def couriers_menu(couriers_list):
     while True:
@@ -34,54 +34,78 @@ def couriers_menu(couriers_list):
                     continue
             else:
                 continue
-
+        # Update Existing courier        
         elif courier_menu_input == 3:
+            couriers_list = fetch_couriers()
             if len(couriers_list) == 0:
                 input("there is nothing to update!\nPress Enter to return")
             else:
                 for courier in couriers_list:
-                    # PRINT courier names with its index value
                     print("-----------")
-                    print(f"{couriers_list.index(courier)}-{courier}")
-                # GET user input for courier index value
+                    print(f"{courier['courier_id']}: {courier['name']} - phone number:{courier['phone']}")
                 print("===================================")
-                update_courier_input = get_number_input("Chose courier to update or press Enter to return to Couriers Menu: ",(len(couriers_list)-1))
-                # GET user input for new courier name
-                if update_courier_input is not "":
-                    for i in couriers_list[update_courier_input]:
-                        # GET user input for updated property
-                        print("===================================")
-                        user_input = input(f"Type new {i}\nOr press Enter to skip: ")
-                        if len(user_input) <= 0:
-                            # do not update this property and skip
-                            continue
-                        elif i == "phone":
-                            while True:
-                                try:
-                                    number = int(user_input)
-                                    couriers_list[update_courier_input][i] = number
-                                    break
-                                except ValueError:
-                                    user_input = input("Please enter a valid number or press Enter to skip: ")
-                            # update the property value with user input
-                        else:
-                            couriers_list[update_courier_input][i] = user_input
-                else:
-                    continue
 
+                while True:
+                    update_courier_input = get_number_input("Chose courier to update or press Enter to return to Couriers Menu: ","number",None, True)
+                    if update_courier_input == "":
+                        break
+
+                    update_courier_input = int(update_courier_input)
+                    indexes = [courier['courier_id'] for courier in couriers_list]
+
+                    if update_courier_input not in indexes:
+                        print("That courier is not available")
+                        continue
+                    else:
+                        for courier in couriers_list:
+                            if courier["courier_id"] == update_courier_input:
+                                for key in courier:
+                                    if key == 'courier_id':
+                                        continue
+                                    else:
+                                        print("===================================")
+                                        user_input = input(f"Type new {key}\nOr press Enter to skip: ")
+                                        if len(user_input) <= 0:
+                                            continue
+                                        elif key == "phone":
+                                            while True:
+                                                if user_input == "":
+                                                    break
+                                                try:
+                                                    update_courier_phone(update_courier_input, user_input)
+                                                    break
+                                                except ValueError:
+                                                    print("Error: Please enter a valid phone number(use only numbers).")
+                                                user_input = input("Please enter a valid number or press Enter to skip: ")
+                                        else:
+                                            update_courier_name(update_courier_input, user_input)
+                        break
+        # Delete Courier                
         elif courier_menu_input == 4:
-            # PRINT courier list
+
+            couriers_list = fetch_couriers()
             if len(couriers_list) == 0:
                 input("There is nothing to delete!\nPress Enter to return")
             else:
                 for courier in couriers_list:
                     print("-----------")
-                    print(f"{couriers_list.index(courier)}-{courier}")
-                # GET user input for courier index value
+                    print(f"{courier['courier_id']}: {courier['name']} - phone number:{courier['phone']}")
                 print("===================================")
-                delete_courier_input = get_number_input("Chose courier to delete or press Enter to go back to Couriers Menu: ", (len(couriers_list)-1))
-                if delete_courier_input is not "":
-                        # DELETE courier at index in courier list
-                    couriers_list.remove(couriers_list[delete_courier_input])
-                else:
-                    continue
+
+                while True:
+                    courier_to_delete = get_number_input("Choose the product to delete or press Enter to go back to Products Menu: ", "number", None, True)
+                    if courier_to_delete == "":
+                        break
+
+                    courier_to_delete = int(courier_to_delete)
+                    indexes = [courier['courier_id'] for courier in couriers_list]
+
+                    if courier_to_delete not in indexes:
+                        print("Courier with this id is not available")
+                        continue
+                    else:
+                        delete_courier(courier_to_delete)
+                        print(f"Product with ID {courier_to_delete} has been deleted.")
+                        break
+
+                        
