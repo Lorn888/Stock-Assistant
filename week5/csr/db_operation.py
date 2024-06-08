@@ -66,12 +66,51 @@ def insert_courier(couriers):
         connection.close()
 
 def create_product(name, price):
+    price = float(price)
     try:
         connection = get_db_connection()
         with connection.cursor() as cursor:
             sql_insert = "INSERT INTO products (name, price) VALUES (%s, %s)"
             cursor.execute(sql_insert, (name, price))
             connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+
+def update_product_price(product_id, price):
+    try:
+        price = float(price)
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_update = "UPDATE products SET price = %s WHERE product_id = %s"
+            cursor.execute(sql_update, (price, product_id))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+ 
+def update_product_name(product_id, name):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_update = "UPDATE products SET name = %s WHERE product_id = %s"
+            cursor.execute(sql_update, (name, product_id))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+
+def delete_product(product_id):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_delete = "DELETE FROM products WHERE product_id = %s"
+            cursor.execute(sql_delete, (product_id,))
+            connection.commit()
+            print("Product deleted successfully.")
     except Exception as e:
         print(f"Error: {e}")
     finally:

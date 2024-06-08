@@ -30,10 +30,10 @@ CREATE TABLE orders (
 
 -- Insert data into the products table
 INSERT INTO products (name, price) 
-VALUES ('coke-zero', '0.6'),
-       ('corona', '4.0'),
-       ('water', '1.0'),
-       ('sprite', '0.6');
+VALUES ('coke-zero', 0.6),
+       ('corona', 4.0),
+       ('water', 1.0),
+       ('sprite', 0.6);
 
 -- Insert data into the couriers table
 INSERT INTO couriers (name, phone) 

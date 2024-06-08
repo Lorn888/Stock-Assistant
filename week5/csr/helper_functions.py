@@ -12,33 +12,33 @@ def group_by_key_value(data_list, key):
             grouped_dict[dictionary[key]].append(dictionary)
     return grouped_dict
 
-def get_number_input(prompt, index="no", empty="empty"):
+def get_number_input(prompt, input_type="number", index=None, allow_empty=False):
     while True:
         user_input = input(prompt)
-        try:
-            if empty =="not empty":
-                if len(user_input) > 0:
-                    number = int(user_input)
+        
+        if allow_empty and user_input == "":
+            return ""  
+
+        if input_type == "number":
+            try:
+                number = float(user_input)
+                if number.is_integer():
+                    number = int(number)
+                if index is not None and (number < 1 or number > index):
+                    print(f"Error: Please enter a number between 0 and {index}.")
+                else:
                     return number
-                else:
-                    print("This can not be empty")
-            elif empty == "empty":
-                if len(user_input) > 0:
-                    number = int(user_input)
-                    if index is not "no":
-                        if 0 <= number <= index:
-                            return number
-                        else:
-                            print("Out of scope")
-                    else:
-                        return number
-
-                else:
-                    return user_input
-                  # Return the number if input is valid
-        except ValueError:
-            print("Error: Please enter a valid number.")
-
+            except ValueError:
+                print("Error: Please enter a valid number.")
+        elif input_type == "string":
+            return user_input
+        elif input_type == "phone":
+            if user_input.isdigit() or (allow_empty and user_input == ""):
+                return user_input
+            else:
+                print("Error: Please enter a valid phone number.")
+        else:
+            print("Error: Invalid input type specified.")
 
 def clear_screen():
     os.system('cls')

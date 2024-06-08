@@ -41,7 +41,7 @@ while True:
     # PRINT main me9nu options
     print_main_menu()
     # GET user input for main menu option
-    main_menu_input = get_number_input("Please enter your choice (0-3): ",3)
+    main_menu_input = get_number_input("Please enter your choice (0-3): ","number",3, False)
     clear_screen()
     if main_menu_input == 0:
 
