@@ -78,6 +78,18 @@ def create_product(name, price):
     finally:
         connection.close()
 
+def create_courier(name, phone):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_insert = "INSERT INTO couriers (name, phone) VALUES (%s, %s)"
+            cursor.execute(sql_insert, (name, phone))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+
 def update_product_price(product_id, price):
     try:
         price = float(price)

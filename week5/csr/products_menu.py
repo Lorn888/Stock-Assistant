@@ -9,12 +9,10 @@ def products_menu():
         clear_screen()
         # Return to the main manu
         if product_menu_input == 0:
-            # RETURN to main menu
             break
         # Products List    
         elif product_menu_input == 1:
             products_list = fetch_products()
-            # PRINT products list
             if len(products_list) == 0:
                 input("Products list is empty\nPress Enter to return")
             else:
@@ -28,12 +26,10 @@ def products_menu():
             print("===================================")
             new_product_input = input("type the name of the new product or press Enter to return to Products Menu: ")
             if new_product_input:
-                # GET user input for product price
                 print("===================================")
                 new_product_price_input = get_number_input("type the price of the new product or press Enter to cancel and return to Products Menu: ", "number", None, True)
                 if new_product_price_input is not "":
                     create_product(new_product_input, new_product_price_input)
-         
                 else:
                     continue
             else:

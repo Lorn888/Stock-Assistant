@@ -1,41 +1,35 @@
 from helper_functions import get_number_input, clear_screen, print_couriers_menu 
+from db_operation import fetch_couriers, create_courier
 
 def couriers_menu(couriers_list):
     while True:
         clear_screen()
-        # PRINT courier menu options
         print_couriers_menu()
-        # GET user input for courier menu option
-        courier_menu_input = get_number_input("Please enter your choice (0-4): ",4)
+        courier_menu_input = get_number_input("Please enter your choice (0-4): ","number", 4, True)
         clear_screen()
+        # Return to the main manu
         if courier_menu_input == 0:
-            # RETURN to main menu
             break
-
+        # Couriers List        
         elif courier_menu_input == 1:
-            # PRINT couriers list
+            couriers_list = fetch_couriers()
             if len(couriers_list) == 0:
                 input("Couriers list is empty\nPress Enter to return")
             else:
                 for courier in couriers_list:
-                    print(courier)
+                    print(f"{courier['name']} - phone number:{courier['phone']}")
                     print("-----------")
                 input("Press enter to return to the Couriers Menu")
-
+        # Create new courier
         elif courier_menu_input == 2:
             # GET user input for courier name
             print("===================================")
             new_courier_input = input("Type new couriers name or press Enter to return to Couriers Menu: ")
             if new_courier_input:
                 print("===================================")
-                new_courier_number = get_number_input("Type new couriers phone number or press Enter to cancel and return to Couriers Menu:")
+                new_courier_number = get_number_input("Type new couriers phone number or press Enter to cancel and return to Couriers Menu:", "phone", None, True)
                 if new_courier_number is not "":
-                    new_courier = {
-                    "name": new_courier_input,
-                    "phone": new_courier_number
-            }
-            # APPEND courier dictionary to courier list
-                    couriers_list.append(new_courier)
+                    create_courier(new_courier_input, new_courier_number)
                 else:
                     continue
             else:
