@@ -1,5 +1,5 @@
 from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status,group_by_key_value
-
+from db_operation import fetch_products, fetch_couriers
 
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
@@ -19,7 +19,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
         # Print orders menu options
         print_orders_menu()
         # GET user input for orders menu option
-        orders_menu_input = get_number_input("Please enter your choice (0-5): ",5)
+        orders_menu_input = get_number_input("Please enter your choice (0-5): ","number",5,True)
         clear_screen()
         if orders_menu_input == 0:
             #  RETURN to main menu
@@ -30,78 +30,67 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
             if len(orders_list) == 0:
                 input("Orders list is empty\nPress Enter to return")
             else:
-                keys = []
-                for key in orders_list[0]:
-                    keys.append(key)
-            
-                for key in keys:
-                    print(f"{keys.index(key)}-{key}")
-
-
-                    
-                user_input = get_number_input("What would you like to group it by: ")
-                grouped_orders = group_by_key_value(orders_list, keys[user_input])
-
-                for status in grouped_orders:
-                    print(status)
-                    for order in grouped_orders[status]:
-                        print(order)
+                for orders in orders_list:
+                    print(orders)
                     print("-----------")
                 # for order in orders_list:
                 #     print(order)
                 input("Press enter to return to the Orders Menu")
 
         elif orders_menu_input == 2:
-            # GET user input for customer name
+    # GET user input for customer name
             print("===================================")
             customer_name_input = input("Insert Customer name or press Enter to return to Orders Menu")
             if customer_name_input:
-                # name_list = customer_name_input.split(" ")
-                # print(name_list)
-                # GET user input for customer address
-                customer_adress_input = input(
-                    "Insert Customer adress or press Enter to cancel and return to the Orders Menu")
+                customer_adress_input = input("Insert Customer address or press Enter to cancel and return to the Orders Menu")
                 if customer_adress_input:
-                # GET user input for customer phone number
-                    customer_phone_input = get_number_input("Insert Customer phone number or press Enter to cancel and return to Orders Menu")
+                    customer_phone_input = get_number_input("Insert Customer phone number or press Enter to cancel and return to Orders Menu", "phone", None, True)
                     if customer_phone_input:
-                    # PRINT products list with its index values
+                        products_list = fetch_products()
                         for product in products_list:
-                            print(f"{products_list.index(product)}-{product}")
+                            print(f"{product['product_id']}: {product['name']} - £{product['price']}")
                         # GET user inputs for comma-separated list of product index values
                         prod_index_val_input = input(
-                            "type comma-separated list of product index values or press Enter to cancel and return to Orders Menu")
-                        if prod_index_val_input:
-
-                            # PRINT couriers list with index value for each courier
+                            "type comma-separated list (no spaces) of product index values or press Enter to cancel and return to Orders Menu")
+                        
+                        index_list = prod_index_val_input.strip(",").split(",")
+                        index_list = [int(num) for num in index_list]  # Filter out empty strings
+                        if index_list:
+                            couriers_list = fetch_couriers()
                             for courier in couriers_list:
-                                print(f"{couriers_list.index(courier)}-{courier}")
-                            # GET user input for courier index to select courier
-                            select_courier_input = get_number_input("Select a courier", (len(couriers_list)-1))
-                            if select_courier_input is not "":
-
-
-                                customer_order = {
-                                    "customer_name": customer_name_input,
-                                    "customer_address": customer_adress_input,
-                                    "customer_phone": customer_phone_input,
-                                    #  SET order status to be 'PREPARING'
-                                    "courier": select_courier_input,
-                                    "status": order_status[0],
-                                    "items": prod_index_val_input,
-                                }
-                            # APPEND order dictionary to orders list
-                                orders_list.append(customer_order)
-                            else:
-                                continue
+                                print(f"{courier['courier_id']}: {courier['name']} - phone number:{courier['phone']}")
+                            while True:
+                                # GET user input for courier index to select courier
+                                select_courier_input = get_number_input("Select a courier","number", None, True)
+                                if select_courier_input == "":
+                                    break
+                                select_courier_input = int(select_courier_input)
+                                indexes = [courier['courier_id'] for courier in couriers_list]
+                                if select_courier_input not in indexes:
+                                    print("Courier with this id is not available")
+                                    continue
+                                else:
+                                    customer_order = {
+                                        "customer_name": customer_name_input,
+                                        "customer_address": customer_adress_input,
+                                        "customer_phone": customer_phone_input,
+                                        # SET order status to be 'PREPARING'
+                                        "courier": select_courier_input,
+                                        "status": order_status[0],
+                                        "items": index_list,
+                                    }
+                                    # APPEND order dictionary to orders list
+                                    orders_list.append(customer_order)
+                                    break  # Exit the courier selection loop
                         else:
-                            continue
+                            print("No product index values provided. Returning to Orders Menu.")
                     else:
-                        continue
+                        print("Invalid customer phone number. Returning to Orders Menu.")
                 else:
-                    continue
+                    print("Invalid customer address. Returning to Orders Menu.")
             else:
-                continue
+                print("Invalid customer name. Returning to Orders Menu.")
+
 
         elif orders_menu_input == 3:
             # PRINT orders list with its index values
@@ -110,14 +99,14 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
             else:
                 orders_list_with_index()
                 # GET user input for order index value
-                order_status_to_update_input = get_number_input("Chose the order to update the status of of press Enter to return to Orders Menu",(len(orders_list)-1))
-                if order_status_to_update_input is not "":
+                order_status_to_update_input = get_number_input("Chose the order to update the status of of press Enter to return to Orders Menu","number",(len(orders_list)-1),True)
+                if order_status_to_update_input != "":
                     # PRINT order status list with index values
                 
                     status_list_with_index()
                     # GET user input for order status index value
-                    updated_status_input = get_number_input("What would you like to update it to? Or press Enter to cancel changes",(len(order_status)-1))
-                    if updated_status_input is not "":
+                    updated_status_input = get_number_input("What would you like to update it to? Or press Enter to cancel changes","number",(len(order_status)-1), True)
+                    if updated_status_input != "":
 
                     # UPDATE status for order
                         orders_list[order_status_to_update_input]["status"] = order_status[
@@ -136,26 +125,26 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                     print(f"{orders_list.index(order)}-{order}")
                 # GET user input for order index value
                 order_to_update = get_number_input("Chose order to update or press Enter to return to Orders Menu: ",(len(orders_list)-1))
-                if order_to_update is not "":
+                if order_to_update != "":
                 # FOR EACH key-value pair in selected order:
                     for i in orders_list[order_to_update]:
                         if i == "courier":
                             couriers_list_with_index()
                             update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ", (len(couriers_list)-1))
-                            if update_input is not "":
+                            if update_input != "":
                                 orders_list[order_to_update][i] = update_input
                             else:
                                 continue                                    
                         elif i == "status":
                             status_list_with_index()
                             update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ",(len(orders_list)-1))
-                            if update_input is not "":
+                            if update_input != "":
                                 orders_list[order_to_update][i] = update_input
                             else:
                                 continue
                         elif i == "customer phone":
                             update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ")
-                            if update_input is not "":
+                            if update_input != "":
                                 orders_list[order_to_update][i] = update_input
                             else:
                                 continue
@@ -178,7 +167,7 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                 orders_list_with_index()
                 # GET user input for order index value
                 order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu",(len(orders_list)-1))
-                if order_to_delete is not "":
+                if order_to_delete != "":
                 #   DELETE order at index in order list
                     del orders_list[order_to_delete]
                 else:
