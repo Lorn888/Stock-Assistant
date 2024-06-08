@@ -1,6 +1,7 @@
 from helper_functions import get_number_input, clear_screen, print_products_menu
+from db_operation import fetch_products, create_product
 
-def products_menu(products_list):
+def products_menu():
     while True:
         clear_screen()
         # PRINT product menu options
@@ -13,6 +14,7 @@ def products_menu(products_list):
             break
 
         elif product_menu_input == 1:
+            products_list = fetch_products()
             # PRINT products list
             if len(products_list) == 0:
                 input("Products list is empty\nPress Enter to return")
@@ -31,14 +33,8 @@ def products_menu(products_list):
                 print("===================================")
                 new_product_price_input = get_number_input("type the price of the new product or press Enter to cancel and return to Products Menu: ")
                 if new_product_price_input is not "":
-
-                # CREATE new product dictionary with above properties
-                    new_product = {
-                        "name": new_product_input,
-                        "price": float(new_product_price_input)
-                }
-                # APPEND product dictionary to products list
-                    products_list.append(new_product)
+                    create_product(new_product_input, new_product_price_input)
+         
                 else:
                     continue
             else:
