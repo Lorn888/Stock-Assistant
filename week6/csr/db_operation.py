@@ -214,3 +214,16 @@ def delete_courier(courier_id):
         print(f"Error: {e}")
     finally:
         connection.close()
+
+def delete_order(order_id):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_delete = "DELETE FROM orders WHERE order_id = %s"
+            cursor.execute(sql_delete, (order_id,))
+            connection.commit()
+            print(f"Order with ID {order_id} has been deleted.")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()

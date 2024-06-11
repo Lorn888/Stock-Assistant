@@ -1,5 +1,5 @@
 from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status,group_by_key_value
-from db_operation import fetch_products, fetch_couriers, fetch_orders, fetch_statuses, create_order, update_table_value
+from db_operation import fetch_products, fetch_couriers, fetch_orders, fetch_statuses, create_order, update_table_value, delete_order
 
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
@@ -185,18 +185,25 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                                     update_table_value('orders',i,update_input,'order_id',order_to_update)
                             # do not update this property
                             
-                    
                         break
         elif orders_menu_input == 5:
+            orders_list = fetch_orders()
             if len(orders_list) == 0:
                 input("There is nothing to delete\nPress Enter to return")
             else:
-            # PRINT orders list
-                orders_list_with_index()
+                for order in orders_list:
+                            print(f"Order ID: {order['order_id']}\n"
+                            f"Customer Name: {order['customer_name']}\n"
+                            f"Customer Address: {order['customer_address']}\n"
+                            f"Customer Phone: {order['customer_phone']}\n"
+                            f"Courier: {order['courier']}\n"
+                            f"Status: {order['status']}\n"
+                            f"Items: {order['items']}\n"
+                            f"-----------------------------")
                 # GET user input for order index value
-                order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu",(len(orders_list)-1))
+                order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu","number", None, True)
                 if order_to_delete != "":
                 #   DELETE order at index in order list
-                    del orders_list[order_to_delete]
+                    delete_order(order_to_delete)
                 else:
                     continue
