@@ -272,3 +272,27 @@ def delete_order(order_id):
         print(f"Error: {e}")
     finally:
         connection.close()
+
+def delete_order_and_records(order_id):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_delete_items = "DELETE FROM items WHERE order_id = %s"
+            cursor.execute(sql_delete_items, (order_id,))
+            
+            sql_delete_order = "DELETE FROM orders WHERE order_id = %s"
+            cursor.execute(sql_delete_order, (order_id,))
+            
+            sql_delete_customer = """
+                DELETE FROM customer_details WHERE customer_id = (
+                    SELECT customer_id FROM orders WHERE order_id = %s
+                )
+            """
+            cursor.execute(sql_delete_customer, (order_id,))
+            
+            connection.commit()
+            print(f"Order {order_id} and associated records deleted successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()

@@ -1,5 +1,5 @@
 from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status,group_by_key_value
-from db_operation import fetch_products, fetch_couriers, fetch_orders, fetch_statuses, create_order, update_table_value, delete_order
+from db_operation import fetch_products, fetch_couriers, fetch_orders, fetch_statuses, create_order, update_table_value, delete_order, delete_order_and_records
 
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
@@ -212,5 +212,5 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                             continue
                         else:
                     #   DELETE order at index in order list
-                            delete_order(order_to_delete)
+                            delete_order_and_records(order_to_delete)
                             break
