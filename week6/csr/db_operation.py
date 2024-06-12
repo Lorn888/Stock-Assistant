@@ -81,10 +81,6 @@ def fetch_orders():
     finally:
         connection.close()
 
-
-
-
-
 def fetch_statuses():
     try:
         connection = get_db_connection()
@@ -98,51 +94,13 @@ def fetch_statuses():
     finally:
         connection.close()
 
-def clear_table(table_name):
-    try:
-        connection = get_db_connection()
-        with connection.cursor() as cursor:
-            sql_clear_table = f"TRUNCATE TABLE {table_name}"
-            cursor.execute(sql_clear_table)
-            connection.commit()
-    except pymysql.Error as e:
-        print(f"Error: {e}")
-    finally:
-        connection.close()
-
-# def insert_product(products):
-#     try:
-#         connection = get_db_connection()
-#         with connection.cursor() as cursor:
-#             sql_insert_product = "INSERT INTO products (name, price) VALUES (%s, %s)"
-#             for product in products:
-#                 cursor.execute(sql_insert_product, (product["name"], product["price"]))
-#             connection.commit()
-#     except pymysql.Error as e:
-#         print(f"Error: {e}")
-#     finally:
-#         connection.close()
-
-# def insert_courier(couriers):
-#     try:
-#         connection = get_db_connection()
-#         with connection.cursor() as cursor:
-#             sql_insert_courier = "INSERT INTO couriers (name, phone) VALUES (%s, %s)"
-#             for courier in couriers:
-#                 cursor.execute(sql_insert_courier, (courier["name"], courier["phone"]))
-#             connection.commit()
-#     except pymysql.Error as e:
-#         print(f"Error: {e}")
-#     finally:
-#         connection.close()
-
-def create_product(name, price):
+def create_product(name, price, quantity):
     price = float(price)
     try:
         connection = get_db_connection()
         with connection.cursor() as cursor:
-            sql_insert = "INSERT INTO products (name, price) VALUES (%s, %s)"
-            cursor.execute(sql_insert, (name, price))
+            sql_insert = "INSERT INTO products (name, price, quantity) VALUES (%s, %s, %s)"
+            cursor.execute(sql_insert, (name, price, quantity))
             connection.commit()
     except Exception as e:
         print(f"Error: {e}")

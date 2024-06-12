@@ -17,7 +17,7 @@ def products_menu():
                 input("Products list is empty\nPress Enter to return")
             else:
                 for product in products_list:
-                    print (f"{product['name']} - £{product['price']}")
+                    print (f"{product['name']} - £{product['price']} | {product['quantity']} units")
                     print("-----------")
                 input("Press enter to return to the Products Menu")
         # Create new product    
@@ -28,8 +28,12 @@ def products_menu():
             if new_product_input:
                 print("===================================")
                 new_product_price_input = get_number_input("type the price of the new product or press Enter to cancel and return to Products Menu: ", "number", None, True)
+                if new_product_price_input:
+                    print("===================================")
+                    new_product_quantity_input = get_number_input("type the quantity of the new product or press Enter to cancel and return to Products Menu: ", "number", None, True)
+
                 if new_product_price_input is not "":
-                    create_product(new_product_input, new_product_price_input)
+                    create_product(new_product_input, new_product_price_input, new_product_quantity_input)
                 else:
                     continue
             else:
