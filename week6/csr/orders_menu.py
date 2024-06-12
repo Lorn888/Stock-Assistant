@@ -1,19 +1,9 @@
 from helper_functions import get_number_input, clear_screen, print_orders_menu,order_status,group_by_key_value
-from db_operation import fetch_products, fetch_couriers, fetch_orders, fetch_statuses, create_order, update_table_value, delete_order, delete_order_and_records
+from db_operation import fetch_products, fetch_couriers, fetch_orders, fetch_statuses, create_order, update_table_value, delete_order_and_records, create_customer_details
 
 
 def orders_menu(orders_list, order_status, couriers_list, products_list):
 
-    def status_list_with_index():
-        for status in order_status:
-            print(f"{order_status.index(status)}-{status}")
-    def couriers_list_with_index():
-        for courier in couriers_list:
-            print(f"{couriers_list.index(courier)}-{courier}")
-    def orders_list_with_index():
-        for order in orders_list:
-            print(f"{orders_list.index(order)}-{order}")
-    
     while True:
         clear_screen()
         # Print orders menu options
@@ -48,20 +38,46 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                     customer_phone_input = get_number_input("Insert Customer phone number or press Enter to cancel and return to Orders Menu", "phone", None, True)
                     if customer_phone_input:
                         products_list = fetch_products()
-                        for product in products_list:
-                            print(f"{product['product_id']}: {product['name']} - £{product['price']}")
-                        # GET user inputs for comma-separated list of product index values
-                        prod_index_val_input = input(
-                            "type comma-separated list (no spaces) of product index values or press Enter to cancel and return to Orders Menu")
-                        
-                        index_list = prod_index_val_input.strip(",").split(",")
-                        index_list = [int(num) for num in index_list]  # Filter out empty strings
-                        if index_list:
+                        order_items = []
+                        while True:
+                            for product in products_list:
+                                print(f"{product['product_id']}: {product['name']} - £{product['price']}")
+                            
+                            prod_index_val_input = get_number_input("Choose a product or press Enter to cancel and return to Orders Menu: ", "number", None, True)
+                            
+                            if not prod_index_val_input:
+                                break  
+                            
+                            
+                            already_chosen = False
+                            for item in order_items:
+                                if prod_index_val_input == item["product_id"]:
+                                    already_chosen = True
+                                    print("You have already chosen this product.")
+                                    break
+                            
+                            if not already_chosen:
+                                chosen_products = {"product_id": prod_index_val_input, "quantity": None}
+                                units = get_number_input("How many units?: ", "number", None, False)
+                                chosen_products["quantity"] = units
+                                order_items.append(chosen_products)
+                                
+                                more = input("Would you like to choose more products? 'y' for yes, 'n' for no: ")
+                                if more.lower() == "n":
+                                    break 
+                                else:
+                                    continue
+
+                                    
+                                        
+                                
+
+                        if prod_index_val_input:
                             couriers_list = fetch_couriers()
                             for courier in couriers_list:
                                 print(f"{courier['courier_id']}: {courier['name']} - phone number:{courier['phone']}")
+                            print(chosen_products)
                             while True:
-                                # GET user input for courier index to select courier
                                 select_courier_input = get_number_input("Select a courier","number", None, True)
                                 if select_courier_input == "":
                                     break
@@ -71,8 +87,16 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                                     print("Courier with this id is not available")
                                     continue
                                 else:
-                                    create_order(customer_name_input,customer_adress_input,customer_phone_input,select_courier_input,1,prod_index_val_input)
-                                    break  # Exit the courier selection loop
+                                    print(f"Customer Name: {customer_name_input}")
+                                    print(f"Customer Address: {customer_adress_input}")
+                                    print(f"Customer Phone: {customer_phone_input}")
+                                    print(f"Selected Courier: {select_courier_input}")
+                                    print("Priority: 1")
+                                    print(f"Order Items: {order_items}")
+                                    input()
+
+                                    create_order(customer_name_input, customer_adress_input,customer_phone_input, select_courier_input, 1,order_items)
+                                    break  
                         else:
                             print("No product index values provided. Returning to Orders Menu.")
                     else:

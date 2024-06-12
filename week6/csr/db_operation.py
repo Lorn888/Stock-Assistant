@@ -119,16 +119,63 @@ def create_courier(name, phone):
     finally:
         connection.close()
 
-def create_order(customer_name,customer_address,customer_phone,courier,status,items):
+def create_order(customer_name, customer_address, customer_phone, courier_id, status_id, order_items):
     try:
         connection = get_db_connection()
         with connection.cursor() as cursor:
-            sql_insert = "INSERT INTO orders (customer_name,customer_address,customer_phone,courier,status,items) VALUES (%s, %s, %s, %s, %s, %s)"
-            cursor.execute(sql_insert, (customer_name,customer_address,customer_phone,courier,status,items))
+            sql_insert_customer = """
+                INSERT INTO customer_details (customer_name, customer_address, customer_phone)
+                VALUES (%s, %s, %s)
+            """
+            cursor.execute(sql_insert_customer, (customer_name, customer_address, customer_phone))
+            
+            customer_id = cursor.lastrowid
+            
+            sql_insert_order = """
+                INSERT INTO orders (customer_id, courier, status)
+                VALUES (%s, %s, %s)
+            """
+            cursor.execute(sql_insert_order, (customer_id, courier_id, status_id))
+            
+            order_id = cursor.lastrowid
+            
+            if order_items:
+                sql_insert_items = """
+                    INSERT INTO items (order_id, product_id, quantity)
+                    VALUES (%s, %s, %s)
+                """
+                for item in order_items:
+                    cursor.execute(sql_insert_items, (order_id, item['product_id'], item['quantity']))
+            
             connection.commit()
+            
+            print("Order created successfully.")
+    
     except Exception as e:
         print(f"Error: {e}")
+    
     finally:
+        connection.close()
+
+
+
+def create_customer_details(customer_name, customer_address, customer_phone):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_insert_customer = """
+                INSERT INTO customer_details (customer_name, customer_address, customer_phone)
+                VALUES (%s, %s, %s)
+            """
+            cursor.execute(sql_insert_customer, (customer_name, customer_address, customer_phone))
+            connection.commit()
+    
+    except Exception as e:
+        # Print error message if something goes wrong
+        print(f"Error: {e}")
+    
+    finally:
+        # Close the database connection
         connection.close()
 
 def update_product_price(product_id, price):
