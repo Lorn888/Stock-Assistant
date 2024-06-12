@@ -143,7 +143,31 @@ def update_product_price(product_id, price):
         print(f"Error: {e}")
     finally:
         connection.close()
+
+def update_product_name(product_id, name):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_update = "UPDATE products SET name = %s WHERE product_id = %s"
+            cursor.execute(sql_update, (name, product_id))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
  
+def update_product_quantity(product_id, quantity):
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            sql_update = "UPDATE products SET quantity = %s WHERE product_id = %s"
+            cursor.execute(sql_update, (quantity, product_id))
+            connection.commit()
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        connection.close()
+
 def update_courier_phone(courier_id, phone):
     try:
         connection = get_db_connection()
@@ -156,17 +180,6 @@ def update_courier_phone(courier_id, phone):
     finally:
         connection.close()
  
-def update_product_name(product_id, name):
-    try:
-        connection = get_db_connection()
-        with connection.cursor() as cursor:
-            sql_update = "UPDATE products SET name = %s WHERE product_id = %s"
-            cursor.execute(sql_update, (name, product_id))
-            connection.commit()
-    except Exception as e:
-        print(f"Error: {e}")
-    finally:
-        connection.close()
 
 def update_courier_name(courier_id, name):
     try:

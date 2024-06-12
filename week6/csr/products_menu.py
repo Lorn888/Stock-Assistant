@@ -1,5 +1,5 @@
 from helper_functions import get_number_input, clear_screen, print_products_menu
-from db_operation import fetch_products, create_product  , update_product_price, update_product_name, delete_product, delete_courier
+from db_operation import fetch_products, create_product  , update_product_price, update_product_name, delete_product, update_product_quantity
 
 def products_menu():
     while True:
@@ -46,7 +46,7 @@ def products_menu():
             else:
                 for product in products_list:
                     print("-----------")
-                    print(f"{product['product_id']}: {product['name']} - £{product['price']}")
+                    print(f"{product['product_id']}: {product['name']} - £{product['price']} | {product['quantity']} units")
                 print("===================================")
                 
                 while True:
@@ -69,7 +69,7 @@ def products_menu():
                                     else:
                                         print("===================================")
                                         user_input = input(f"Type new {key} or press Enter to skip: ")
-                                        if len(user_input) <= 0:
+                                        if len(user_input) == 0:
                                             continue
                                         elif key == "price":
                                             while True:
@@ -83,8 +83,22 @@ def products_menu():
                                                         update_product_price(product_to_update_input, number)
                                                         break
                                                 except ValueError:
-                                                    print("Error: Please enter a valid price.")
+                                                    print("Error: Wrong price.")
                                                 user_input = input("Please enter a valid price or press Enter to skip: ")
+                                        elif key == "quantity":
+                                            while True:
+                                                if user_input == "":
+                                                    break
+                                                try:
+                                                    number = int(user_input)
+                                                    if number < 0:
+                                                        print("Error: Quantity cannot be negative (stock check recomended)")
+                                                    else:
+                                                        update_product_quantity(product_to_update_input, number)
+                                                        break
+                                                except ValueError:
+                                                    print("Error: Wrong quantity.")
+                                                user_input = input("Please enter a valid quantity or press Enter to skip: ")
                                         else:
                                             update_product_name(product_to_update_input, user_input)
                         break
