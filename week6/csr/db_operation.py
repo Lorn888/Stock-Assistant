@@ -31,14 +31,59 @@ def fetch_orders():
     try:
         connection = get_db_connection()
         with connection.cursor(pymysql.cursors.DictCursor) as cursor:
-            sql_select_orders = "SELECT * FROM orders"
+            sql_select_orders = """
+                SELECT * FROM orders;
+            """
             cursor.execute(sql_select_orders)
-            orders_list = cursor.fetchall()
-            return list(orders_list) 
+            raw_orders = cursor.fetchall()
+            orders = []
+            for order in raw_orders:
+                order_details = {
+                    'order_id': order['order_id'],
+                    'customer_name': '',
+                    'customer_address': '',
+                    'customer_phone': '',
+                    'courier': order['courier'],  # Matches schema
+                    'status': order['status'],  # Matches schema
+                    'items': []  # Matches schema
+                }
+                customer_query = """
+                    SELECT * FROM customer_details WHERE customer_id=%s;
+                """
+                cursor.execute(customer_query, (order['customer_id'],))
+                customer = cursor.fetchone()
+                if customer:
+                    order_details['customer_name'] = customer['customer_name']
+                    order_details['customer_address'] = customer['customer_address']
+                    order_details['customer_phone'] = customer['customer_phone']
+                order_items_query = """
+                    SELECT * FROM items WHERE order_id=%s;  # Matches schema
+                """
+                cursor.execute(order_items_query, (order['order_id'],))
+                order_items = cursor.fetchall()
+                for item in order_items:
+                    product_query = """
+                        SELECT * FROM products WHERE product_id=%s;
+                    """
+                    cursor.execute(product_query, (item['product_id'],))
+                    product = cursor.fetchone()
+                    if product:
+                        ordered_item = {
+                            'product_id': item['product_id'],
+                            'product_name': product['name'],
+                            'quantity': item['quantity']
+                        }
+                        order_details['items'].append(ordered_item)  # Matches schema
+                orders.append(order_details)
+            return orders 
     except Exception as e:
         print(f"Error: {e}")
     finally:
         connection.close()
+
+
+
+
 
 def fetch_statuses():
     try:

@@ -173,17 +173,16 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                             elif i == "customer_phone":
                                 update_input = get_number_input(f"Type new {i}\nOr press Enter to skip: ","phone",None,True)
                                 if update_input != "":
-                                    update_table_value('orders','customer_phone',update_input,'order_id',order_to_update)
+                                    update_table_value('customer_details','customer_phone',update_input,'customer_id',order_to_update)
                                 else:
                                     continue
-                            # GET user input for updated property
-                            else:    
+                            else:
                                 update_input = input(f"Type new {i}\nOr press Enter to skip: ")
-                                if len(update_input) == 0:
-                                    continue
+                                if update_input != "":
+                                    update_table_value('customer_details',i,update_input,'customer_id',order_to_update)
                                 else:
-                                    update_table_value('orders',i,update_input,'order_id',order_to_update)
-                            # do not update this property
+                                    continue
+                         
                             
                         break
         elif orders_menu_input == 5:
@@ -200,10 +199,18 @@ def orders_menu(orders_list, order_status, couriers_list, products_list):
                             f"Status: {order['status']}\n"
                             f"Items: {order['items']}\n"
                             f"-----------------------------")
+                while True:
                 # GET user input for order index value
-                order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu","number", None, True)
-                if order_to_delete != "":
-                #   DELETE order at index in order list
-                    delete_order(order_to_delete)
-                else:
-                    continue
+                    order_to_delete = get_number_input("Chose order to delete or press Enter to return to Orders Menu","number", None, True)
+                
+                    if order_to_delete == "":
+                        break
+                    else:
+                        indexes = [order['order_id'] for order in orders_list]
+                        if order_to_delete not in indexes:
+                            print("Order id not available")
+                            continue
+                        else:
+                    #   DELETE order at index in order list
+                            delete_order(order_to_delete)
+                            break
