@@ -41,16 +41,15 @@ CREATE TABLE customer_details (
 CREATE TABLE orders (
   order_id INT NOT NULL AUTO_INCREMENT,
   customer_id INT NOT NULL,
-  courier INT NOT NULL,  -- Changed courier_id to courier
-  status INT NOT NULL,  -- Changed status_id to status
+  courier INT NOT NULL,  
+  status INT NOT NULL,  
   PRIMARY KEY(order_id),
   FOREIGN KEY (customer_id) REFERENCES customer_details(customer_id),
-  FOREIGN KEY (courier) REFERENCES couriers(courier_id),  -- Updated foreign key reference
-  FOREIGN KEY (status) REFERENCES order_statuses(status_id)  -- Updated foreign key reference
-);
+  FOREIGN KEY (courier) REFERENCES couriers(courier_id), 
+  FOREIGN KEY (status) REFERENCES order_statuses(status_id) 
 
 -- Table to store ordered items
-CREATE TABLE items (  -- Changed order_items to items
+CREATE TABLE items (  
   order_item_id INT NOT NULL AUTO_INCREMENT,
   order_id INT NOT NULL,
   product_id INT NOT NULL,
@@ -92,7 +91,7 @@ VALUES
 ('David', '5 Church Hill, Walthamstow, London', '4567890123');
 
 -- Insert sample data into orders table
-INSERT INTO orders (customer_id, courier, status)  -- Updated to match new column name
+INSERT INTO orders (customer_id, courier, status)  
 VALUES 
 (1, 1, 1),
 (2, 2, 2),

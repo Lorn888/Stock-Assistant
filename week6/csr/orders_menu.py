@@ -6,7 +6,7 @@ def orders_menu():
         clear_screen()
         print_orders_menu()
         orders_menu_input = get_number_input(
-            "Please enter your choice (0-5): ", "number", 5, True
+            "Please enter your choice (0-6): ", "number", 6, True
         )
         clear_screen()
         # Exit
@@ -378,3 +378,8 @@ def orders_menu():
                             #   DELETE order at index in order list
                             delete_order_and_records(order_to_delete)
                             break
+        # Export to csv
+        elif orders_menu_input == 6:
+            save_data_to_csv("orders.csv")
+
+

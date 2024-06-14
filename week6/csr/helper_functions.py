@@ -105,4 +105,5 @@ def print_orders_menu():
     print("3. Update Existing Order Status")
     print("4. Update Existing Order")
     print("5. Delete Order")
+    print("6. Save orders in csv file")
     print("===================================")

@@ -17,3 +17,5 @@ def get_db_connection():
         password=user_password
     )
     return connection
+
+

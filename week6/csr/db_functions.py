@@ -1,5 +1,8 @@
 import pymysql
 from db_connection import get_db_connection
+import pandas as pd
+
+
 
 def fetch_products():
     try:
@@ -43,9 +46,9 @@ def fetch_orders():
                     'customer_name': '',
                     'customer_address': '',
                     'customer_phone': '',
-                    'courier': order['courier'],  # Matches schema
-                    'status': order['status'],  # Matches schema
-                    'items': []  # Matches schema
+                    'courier': order['courier'],   
+                    'status': order['status'],  
+                    'items': [] 
                 }
                 customer_query = """
                     SELECT * FROM customer_details WHERE customer_id=%s;
@@ -57,7 +60,7 @@ def fetch_orders():
                     order_details['customer_address'] = customer['customer_address']
                     order_details['customer_phone'] = customer['customer_phone']
                 order_items_query = """
-                    SELECT * FROM items WHERE order_id=%s;  # Matches schema
+                    SELECT * FROM items WHERE order_id=%s; 
                 """
                 cursor.execute(order_items_query, (order['order_id'],))
                 order_items = cursor.fetchall()
@@ -73,7 +76,7 @@ def fetch_orders():
                             'product_name': product['name'],
                             'quantity': item['quantity']
                         }
-                        order_details['items'].append(ordered_item)  # Matches schema
+                        order_details['items'].append(ordered_item)  
                 orders.append(order_details)
             return orders 
     except Exception as e:
@@ -169,11 +172,9 @@ def create_customer_details(customer_name, customer_address, customer_phone):
             connection.commit()
     
     except Exception as e:
-        # Print error message if something goes wrong
         print(f"Error: {e}")
     
     finally:
-        # Close the database connection
         connection.close()
 
 def update_product_price(product_id, price):
@@ -311,3 +312,33 @@ def delete_order_and_records(order_id):
         print(f"Error: {e}")
     finally:
         connection.close()
+
+def save_data_to_csv(csv_file_path):
+    conn = get_db_connection()
+    query = """
+    SELECT 
+        o.order_id,
+        c.customer_name,
+        c.customer_address,
+        c.customer_phone,
+        co.name AS courier_name,
+        s.order_status,
+        i.product_id,
+        p.name AS product_name,
+        i.quantity
+    FROM orders o
+    JOIN customer_details c ON o.customer_id = c.customer_id
+    JOIN couriers co ON o.courier = co.courier_id
+    JOIN order_statuses s ON o.status = s.status_id
+    JOIN items i ON o.order_id = i.order_id
+    JOIN products p ON i.product_id = p.product_id
+    """
+
+    try:
+        df = pd.read_sql_query(query, conn)
+
+        df.to_csv(csv_file_path, index=False)
+        print(f"Data has been saved to {csv_file_path}")
+    finally:
+        conn.close()
+

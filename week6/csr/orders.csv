@@ -1,0 +1,18 @@
+order_id,customer_name,customer_address,customer_phone,courier_name,order_status,product_id,product_name,quantity
+1,Alice,"10 High Street, Walthamstow, London",1234567890,Tomek,PREPARING,1,coke-zero,2
+1,Alice,"10 High Street, Walthamstow, London",1234567890,Tomek,PREPARING,2,corona,1
+7,Patry,London,0795232344,Tomek,PREPARING,3,water,100
+9,000,000,000,Tomek,PREPARING,2,corona,40
+9,000,000,000,Tomek,PREPARING,3,water,90
+9,000,000,000,Tomek,PREPARING,4,sprite,40
+10,dsf,sdf,342,Tomek,PREPARING,1,coke-zero,1
+2,Bob,"22 Forest Road, Walthamstow, London",2345678901,Mike,DISPATCHED,3,water,4
+2,Bob,"22 Forest Road, Walthamstow, London",2345678901,Mike,DISPATCHED,4,sprite,3
+5,1111,1111,1111,Mike,PREPARING,1,coke-zero,50
+8,sdsdf,sfds,2334234,Mike,PREPARING,1,coke-zero,5
+8,sdsdf,sfds,2334234,Mike,PREPARING,4,sprite,100
+3,Charlie,"15 Hoe Street, Walthamstow, London",3456789012,Sudesh,DELIVERED,1,coke-zero,1
+3,Charlie,"15 Hoe Street, Walthamstow, London",3456789012,Sudesh,DELIVERED,3,water,2
+6,4444,444,444,Sudesh,PREPARING,1,coke-zero,40
+4,David,"5 Church Hill, Walthamstow, London",4567890123,Hammed,DELIVERED,2,corona,1
+4,David,"5 Church Hill, Walthamstow, London",4567890123,Hammed,DELIVERED,4,sprite,2
