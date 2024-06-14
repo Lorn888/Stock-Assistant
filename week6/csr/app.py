@@ -1,7 +1,13 @@
 from products_menu import products_menu
 from couriers_menu import couriers_menu
 from orders_menu import orders_menu
-from helper_functions import get_number_input, clear_screen,load_data_from_csv, save_data_to_csv, print_main_menu
+from helper_functions import (
+    get_number_input,
+    clear_screen,
+    load_data_from_csv,
+    save_data_to_csv,
+    print_main_menu,
+)
 from db_operation import fetch_couriers, fetch_products
 
 
@@ -41,7 +47,9 @@ while True:
     # PRINT main me9nu options
     print_main_menu()
     # GET user input for main menu option
-    main_menu_input = get_number_input("Please enter your choice (0-3): ","number",3, True)
+    main_menu_input = get_number_input(
+        "Please enter your choice (0-3): ", "number", 3, True
+    )
     clear_screen()
     if main_menu_input == 0:
 
@@ -64,5 +72,4 @@ while True:
 
     # Orders Menu
     elif main_menu_input == 3:
-        products_list = fetch_products()
-        orders_menu(orders_list, order_status, couriers_list, products_list)
+        orders_menu()
