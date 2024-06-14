@@ -1,13 +1,5 @@
-from helper_functions import get_number_input, clear_screen, print_products_menu
-from db_functions import (
-    fetch_products,
-    create_product,
-    update_product_price,
-    update_product_name,
-    delete_product,
-    update_product_quantity,
-)
-
+from helper_functions import *
+from db_functions import *
 
 def products_menu():
     while True:

@@ -1,21 +1,7 @@
-from helper_functions import (
-    get_number_input,
-    clear_screen,
-    print_orders_menu,
-)
-from db_functions import (
-    fetch_products,
-    fetch_couriers,
-    fetch_orders,
-    fetch_statuses,
-    create_order,
-    update_table_value,
-    delete_order_and_records,
-)
-
+from helper_functions import *
+from db_functions import *
 
 def orders_menu():
-
     while True:
         clear_screen()
         print_orders_menu()

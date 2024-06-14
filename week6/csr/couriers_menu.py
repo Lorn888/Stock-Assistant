@@ -1,12 +1,5 @@
-from helper_functions import get_number_input, clear_screen, print_couriers_menu
-from db_functions import (
-    fetch_couriers,
-    create_courier,
-    update_courier_phone,
-    update_courier_name,
-    delete_courier,
-)
-
+from helper_functions import *
+from db_functions import *
 
 def couriers_menu():
     while True:

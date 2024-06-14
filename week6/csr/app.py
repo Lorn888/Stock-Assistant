@@ -1,12 +1,7 @@
-from products_menu import products_menu
-from couriers_menu import couriers_menu
-from orders_menu import orders_menu
-from helper_functions import (
-    get_number_input,
-    clear_screen,
-    save_data_to_csv,
-    print_main_menu,
-)
+from products_menu import *
+from couriers_menu import *
+from orders_menu import *
+from helper_functions import *
 
 # Headers for each CSV file
 products_header = ["name", "price"]
