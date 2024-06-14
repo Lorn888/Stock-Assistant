@@ -43,7 +43,6 @@ def get_number_input(prompt, input_type="number", index=None, allow_empty=False)
 def clear_screen():
     os.system('cls')
 
-
 def load_data_from_csv(file_path): 
     data = []
     try:
@@ -63,8 +62,7 @@ def save_data_to_csv(file_path, data, header):
                 writer.writerow(row)
     except Exception as e:
         print(e)
-
-        
+      
 def print_main_menu():
     print("===================================")
     print("||          MAIN MENU            ||")

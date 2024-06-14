@@ -157,8 +157,6 @@ def create_order(customer_name, customer_address, customer_phone, courier_id, st
     finally:
         connection.close()
 
-
-
 def create_customer_details(customer_name, customer_address, customer_phone):
     try:
         connection = get_db_connection()
@@ -226,7 +224,6 @@ def update_courier_phone(courier_id, phone):
         print(f"Error: {e}")
     finally:
         connection.close()
- 
 
 def update_courier_name(courier_id, name):
     try:

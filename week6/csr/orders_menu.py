@@ -3,7 +3,7 @@ from helper_functions import (
     clear_screen,
     print_orders_menu,
 )
-from db_operation import (
+from db_functions import (
     fetch_products,
     fetch_couriers,
     fetch_orders,
@@ -23,10 +23,11 @@ def orders_menu():
             "Please enter your choice (0-5): ", "number", 5, True
         )
         clear_screen()
+        # Exit
         if orders_menu_input == 0:
             #  RETURN to main menu
             break
-
+        # Orders list   
         elif orders_menu_input == 1:
             orders_list = fetch_orders()
             # PRINT orders dictionary
@@ -47,7 +48,7 @@ def orders_menu():
                         print("    ---------------")
                     print("===============================")
                 input("Press enter to return to the Orders Menu")
-
+        # New Order
         elif orders_menu_input == 2:
             print("===================================")
             customer_name_input = input(
@@ -101,7 +102,7 @@ def orders_menu():
                                         product_quantity = product["quantity"]
                                         print(f"{product_quantity} units available")
 
-                                while True:  # Loop to validate quantity
+                                while True:  
                                     units = get_number_input(
                                         "How many units?: ", "number", None, False
                                     )
@@ -116,8 +117,7 @@ def orders_menu():
                                     else:
                                         chosen_product["quantity"] = units
                                         order_items.append(chosen_product)
-                                        break  # Exit the loop if quantity is valid
-
+                                        break  
                                 more = input(
                                     "Would you like to choose more products? 'y' for yes, 'n' for no: "
                                 )
@@ -185,8 +185,7 @@ def orders_menu():
                     print("Invalid customer address. Returning to Orders Menu.")
             else:
                 print("Invalid customer name. Returning to Orders Menu.")
-
-
+        # Update Order Status
         elif orders_menu_input == 3:
             orders_list = fetch_orders()
 
@@ -240,7 +239,7 @@ def orders_menu():
                         continue
                 else:
                     continue
-
+        # Update Order            
         elif orders_menu_input == 4:
             orders_list = fetch_orders()
             # PRINT orders list with its index values
@@ -356,7 +355,7 @@ def orders_menu():
                                     continue
 
                         break
-                    
+        # Delete Order            
         elif orders_menu_input == 5:
             orders_list = fetch_orders()
             if len(orders_list) == 0:

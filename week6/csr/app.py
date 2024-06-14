@@ -4,14 +4,9 @@ from orders_menu import orders_menu
 from helper_functions import (
     get_number_input,
     clear_screen,
-    load_data_from_csv,
     save_data_to_csv,
     print_main_menu,
 )
-from db_operation import fetch_couriers, fetch_products
-
-
-couriers_list = fetch_couriers()
 
 # Headers for each CSV file
 products_header = ["name", "price"]
@@ -30,12 +25,6 @@ products_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-m
 couriers_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-miniproject/data/couriers.csv"
 orders_file_path = "D:/OneDrive/Desktop/VSCode/DE-PC/Mini-Project-GIT/Patryk-miniproject/data/orders.csv"
 
-# Loading data from CSV files
-# products_list = load_data_from_csv(products_file_path)
-# couriers_list = load_data_from_csv(couriers_file_path)
-orders_list = load_data_from_csv(orders_file_path)
-
-
 # CREATE order status list
 order_status = ["PREPARING", "READY", "SHIPPED"]
 
@@ -44,13 +33,14 @@ clear_screen()
 
 # APP
 while True:
-    # PRINT main me9nu options
+    # PRINT main menu options
     print_main_menu()
     # GET user input for main menu option
     main_menu_input = get_number_input(
         "Please enter your choice (0-3): ", "number", 3, True
     )
     clear_screen()
+    # Exit
     if main_menu_input == 0:
 
         # Save data to CSV files
@@ -58,7 +48,7 @@ while True:
         # save_data_to_csv(couriers_file_path, couriers_list, couriers_header)
         # clear_table("products")
         # clear_table("couriers")
-        save_data_to_csv(orders_file_path, orders_list, orders_header)
+        # save_data_to_csv(orders_file_path, orders_list, orders_header)
         # EXIT app
         break
 
