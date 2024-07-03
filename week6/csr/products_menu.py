@@ -1,6 +1,7 @@
 from helper_functions import *
 from db_functions import *
 
+
 def products_menu():
     while True:
         clear_screen()
