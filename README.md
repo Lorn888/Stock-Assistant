@@ -1,4 +1,5 @@
 # Mini Project README
+
 untill we officially started using git this is where I stored the mini Project progress:
 [here](https://github.com/Lorn888/Mini-Project)
 
