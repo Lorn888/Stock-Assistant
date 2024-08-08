@@ -39,19 +39,17 @@ To run the application:
     ```bash
     docker-compose up -d
     ```
-## How to Run Any Unit Tests
-Currently, the application does not include unit tests. However, as part of future improvements, implementing unit tests is highly recommended to ensure code reliability and maintainability.
 
 ## Project Reflections
-### How did your design go about meeting the project's requirements?
+### Meeting the project's requirements
 The design of the application progressed from simple user input handling and list structures to more sophisticated data management using dictionaries and database tables. This progression allowed for a more scalable and maintainable application.
 
-### How did you guarantee the project's requirements?
+### Guaranteeing the project's requirements
 Throughout the development process, each week's goals were carefully reviewed and implemented to ensure alignment with the client's requirements. Regular testing and debugging were conducted to address any issues promptly.
 
-### If you had more time, what is one thing you would improve upon?
+### Future Improvements
 One area for improvement would be to implement comprehensive unit tests. Unit testing would help validate the functionalities of each module and ensure that any changes made in the future do not introduce unintended issues.
 
-### What did you most enjoy implementing?
+### What I enjoyed Implementing
 I enjoyed implementing the transition from file-based data storage (CSV) to a database-driven approach. This not only improved data management efficiency but also provided a more robust foundation for future enhancements.
 test
